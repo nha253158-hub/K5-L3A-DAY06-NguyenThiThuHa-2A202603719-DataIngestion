@@ -1,0 +1,26 @@
+{
+  "docs_kept": 40,
+  "docs_excluded": [
+    [
+      "isotonic",
+      "tổng 872 ký tự < 1500"
+    ],
+    [
+      "unsupervised_reduction",
+      "tổng 1221 ký tự < 1500"
+    ]
+  ],
+  "pages": 288,
+  "pages_ge_1500": 288,
+  "min_chars": 1505,
+  "max_chars": 16794,
+  "total_chars": 886780,
+  "pages_by_guide_section": {
+    "Supervised learning": 117,
+    "Unsupervised learning": 63,
+    "Model selection and evaluation": 58,
+    "Dataset transformations": 45,
+    "Inspection": 5
+  },
+  "sha256_units": "807313a6f10ed041c1533b0a7e1e416031dca19cd8d992412a801807076c6a86"
+}

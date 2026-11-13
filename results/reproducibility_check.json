@@ -1,0 +1,9 @@
+{
+  "checked_at_utc": "2026-11-13",
+  "what": "Dựng lại corpus (build_corpus.py), kiểm tra lại benchmark (benchmark_validate.py, giữ mốc đóng băng cũ) và chạy lại run_experiments.py trên chỉ mục có sẵn",
+  "corpus_units_sha256_identical": true,
+  "manifest_identical": true,
+  "metrics_csv_identical": true,
+  "traces": "66/66 (câu x cấu hình) trùng chunk_id, điểm cosine và cờ hit; chỉ thứ tự khóa metadata trong JSON khác",
+  "note": "File trace/metrics/run_meta trong repo là của lần chạy đầu (sau ingest); lần chạy lại chỉ dùng để kiểm tra."
+}

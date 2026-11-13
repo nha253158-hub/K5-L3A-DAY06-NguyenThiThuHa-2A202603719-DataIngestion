@@ -1,0 +1,24 @@
+question_id,split,gold_page,occurrences_in_gold_page,also_found_in_other_pages,evidence_chars,guide_section_of_gold
+D01,dev,tree:003,1,,89,Supervised learning
+D02,dev,clustering:019,1,,166,Unsupervised learning
+D03,dev,preprocessing:006,1,,157,Dataset transformations
+D04,dev,cross_validation:007,1,,186,Model selection and evaluation
+D05,dev,svm:003,1,,54,Supervised learning
+D06,dev,naive_bayes:002,1,,130,Supervised learning
+D07,dev,model_evaluation:007,1,,142,Model selection and evaluation
+D08,dev,outlier_detection:003,1,,68,Unsupervised learning
+D09,dev,linear_model:005,1,,106,Supervised learning
+D10,dev,grid_search:006,1,,189,Model selection and evaluation
+D11,dev,impute:004,1,,114,Dataset transformations
+D12,dev,calibration:002,1,,168,Supervised learning
+D13,dev,clustering:001,1,,176,Unsupervised learning
+D14,dev,linear_model:017,1,,87,Supervised learning
+D15,dev,tree:008,1,,108,Supervised learning
+D15,dev,ensemble:001,1,,89,Supervised learning
+D16,dev,lda_qda:003,1,,187,Supervised learning
+T01,test,decomposition:001,1,,224,Unsupervised learning
+T02,test,ensemble:005,1,,268,Supervised learning
+T03,test,neighbors:008,1,,127,Supervised learning
+T04,test,random_projection:001,1,,141,Dataset transformations
+T05,test,density:001,1,,161,Unsupervised learning
+T06,test,permutation_importance:001,1,,159,Inspection

@@ -1,0 +1,55 @@
+config,question_id,rank,chunk_id,document_id,page,guide_section,source,complete_and_correct,errors,filter_required,filter_ok
+A,T01,1,A:decomposition:001:001,decomposition,decomposition:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/decomposition.rst,True,,False,
+A,T01,2,A:decomposition:001:000,decomposition,decomposition:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/decomposition.rst,True,,False,
+A,T01,3,A:compose:002:003,compose,compose:002,Dataset transformations,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/compose.rst,True,,False,
+A,T02,1,A:ensemble:005:001,ensemble,ensemble:005,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/ensemble.rst,True,,False,
+A,T02,2,A:ensemble:005:002,ensemble,ensemble:005,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/ensemble.rst,True,,False,
+A,T02,3,A:ensemble:004:002,ensemble,ensemble:004,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/ensemble.rst,True,,False,
+A,T03,1,A:neighbors:009:001,neighbors,neighbors:009,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/neighbors.rst,True,,False,
+A,T03,2,A:neighbors:008:000,neighbors,neighbors:008,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/neighbors.rst,True,,False,
+A,T03,3,A:neighbors:008:002,neighbors,neighbors:008,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/neighbors.rst,True,,False,
+A,T04,1,A:random_projection:001:003,random_projection,random_projection:001,Dataset transformations,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/random_projection.rst,True,,False,
+A,T04,2,A:random_projection:001:001,random_projection,random_projection:001,Dataset transformations,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/random_projection.rst,True,,False,
+A,T04,3,A:metrics:002:003,metrics,metrics:002,Dataset transformations,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/metrics.rst,True,,False,
+A,T05,1,A:kernel_ridge:000:002,kernel_ridge,kernel_ridge:000,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/kernel_ridge.rst,True,,True,False
+A,T05,2,A:outlier_detection:001:005,outlier_detection,outlier_detection:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/outlier_detection.rst,True,,True,True
+A,T05,3,A:density:001:002,density,density:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/density.rst,True,,True,True
+A,T06,1,A:permutation_importance:001:001,permutation_importance,permutation_importance:001,Inspection,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/permutation_importance.rst,True,,True,True
+A,T06,2,A:ensemble:006:003,ensemble,ensemble:006,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/ensemble.rst,True,,True,False
+A,T06,3,A:permutation_importance:001:004,permutation_importance,permutation_importance:001,Inspection,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/permutation_importance.rst,True,,True,True
+B,T01,1,B:decomposition:001:002,decomposition,decomposition:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/decomposition.rst,True,,False,
+B,T01,2,B:decomposition:001:005,decomposition,decomposition:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/decomposition.rst,True,,False,
+B,T01,3,B:decomposition:001:001,decomposition,decomposition:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/decomposition.rst,True,,False,
+B,T02,1,B:ensemble:005:001,ensemble,ensemble:005,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/ensemble.rst,True,,False,
+B,T02,2,B:ensemble:005:002,ensemble,ensemble:005,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/ensemble.rst,True,,False,
+B,T02,3,B:grid_search:003:017,grid_search,grid_search:003,Model selection and evaluation,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/grid_search.rst,True,,False,
+B,T03,1,B:neighbors:008:000,neighbors,neighbors:008,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/neighbors.rst,True,,False,
+B,T03,2,B:neighbors:009:000,neighbors,neighbors:009,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/neighbors.rst,True,,False,
+B,T03,3,B:neighbors:008:003,neighbors,neighbors:008,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/neighbors.rst,True,,False,
+B,T04,1,B:random_projection:001:001,random_projection,random_projection:001,Dataset transformations,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/random_projection.rst,True,,False,
+B,T04,2,B:random_projection:001:002,random_projection,random_projection:001,Dataset transformations,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/random_projection.rst,True,,False,
+B,T04,3,B:learning_curve:001:003,learning_curve,learning_curve:001,Model selection and evaluation,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/learning_curve.rst,True,,False,
+B,T05,1,B:density:001:002,density,density:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/density.rst,True,,True,True
+B,T05,2,B:clustering:004:003,clustering,clustering:004,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/clustering.rst,True,,True,True
+B,T05,3,B:density:001:003,density,density:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/density.rst,True,,True,True
+B,T06,1,B:ensemble:006:004,ensemble,ensemble:006,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/ensemble.rst,True,,True,False
+B,T06,2,B:permutation_importance:001:002,permutation_importance,permutation_importance:001,Inspection,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/permutation_importance.rst,True,,True,True
+B,T06,3,B:ensemble:002:008,ensemble,ensemble:002,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/ensemble.rst,True,,True,False
+C,T01,1,B:decomposition:001:002,decomposition,decomposition:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/decomposition.rst,True,,False,
+C,T01,2,B:decomposition:001:005,decomposition,decomposition:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/decomposition.rst,True,,False,
+C,T01,3,B:decomposition:001:001,decomposition,decomposition:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/decomposition.rst,True,,False,
+C,T02,1,B:ensemble:005:001,ensemble,ensemble:005,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/ensemble.rst,True,,False,
+C,T02,2,B:ensemble:005:002,ensemble,ensemble:005,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/ensemble.rst,True,,False,
+C,T02,3,B:grid_search:003:017,grid_search,grid_search:003,Model selection and evaluation,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/grid_search.rst,True,,False,
+C,T03,1,B:neighbors:008:000,neighbors,neighbors:008,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/neighbors.rst,True,,False,
+C,T03,2,B:neighbors:009:000,neighbors,neighbors:009,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/neighbors.rst,True,,False,
+C,T03,3,B:neighbors:008:003,neighbors,neighbors:008,Supervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/neighbors.rst,True,,False,
+C,T04,1,B:random_projection:001:001,random_projection,random_projection:001,Dataset transformations,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/random_projection.rst,True,,False,
+C,T04,2,B:random_projection:001:002,random_projection,random_projection:001,Dataset transformations,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/random_projection.rst,True,,False,
+C,T04,3,B:learning_curve:001:003,learning_curve,learning_curve:001,Model selection and evaluation,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/learning_curve.rst,True,,False,
+C,T05,1,B:density:001:002,density,density:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/density.rst,True,,True,True
+C,T05,2,B:clustering:004:003,clustering,clustering:004,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/clustering.rst,True,,True,True
+C,T05,3,B:density:001:003,density,density:001,Unsupervised learning,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/density.rst,True,,True,True
+C,T06,1,B:permutation_importance:001:002,permutation_importance,permutation_importance:001,Inspection,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/permutation_importance.rst,True,,True,True
+C,T06,2,B:permutation_importance:001:004,permutation_importance,permutation_importance:001,Inspection,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/permutation_importance.rst,True,,True,True
+C,T06,3,B:permutation_importance:001:001,permutation_importance,permutation_importance:001,Inspection,https://github.com/scikit-learn/scikit-learn/blob/1.9.1/doc/modules/permutation_importance.rst,True,,True,True

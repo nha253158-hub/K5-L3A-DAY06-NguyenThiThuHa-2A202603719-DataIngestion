@@ -1,0 +1,147 @@
+{
+  "meta": {
+    "corpus": "scikit-learn 1.9.1 User Guide (doc/modules/*.rst), 40 documents / 288 pages",
+    "question_language": "vi (thuật ngữ kỹ thuật giữ tiếng Anh); evidence trích nguyên văn tiếng Anh từ nguồn",
+    "authoring": "Câu hỏi và evidence do Claude (LLM) soạn từ việc đọc từng trang nguồn; evidence được script src/benchmark_validate.py kiểm chứng tồn tại trong văn bản chuẩn hóa. Tác giả bài nộp cần rà lại.",
+    "split_rule": "15+ dev / 5+ test; test lấy từ các tài liệu KHÔNG xuất hiện trong dev (decomposition, ensemble, neighbors, random_projection, density, permutation_importance) để giảm rò rỉ theo chủ đề. Ngoại lệ đã biết: D15 chấp nhận thêm ensemble:001 như nguồn hợp lệ thứ hai (ensemble cũng có trang trong test, T02 dùng ensemble:005).",
+    "filter_rule": "filter = {field: guide_section, value: <mục User Guide>} do ngữ cảnh người hỏi cung cấp trước khi truy xuất; giá trị lấy từ toctree gốc của User Guide, không suy ra từ gold.",
+    "hit_definition": "Hit = chunk có unit_id thuộc gold_page và chứa đủ evidence_quote (so khớp sau khi gộp khoảng trắng). Evidence bị tách qua nhiều chunk = không hit."
+  },
+  "questions": [
+    {
+      "id": "D01", "split": "dev", "type": "direct", "filter": null,
+      "question": "Chi phí suy luận (inference) của một cây quyết định phụ thuộc vào yếu tố nào, và có phụ thuộc vào chiến lược chọn splitter không?",
+      "expected_answer": "Không phụ thuộc splitter; chỉ phụ thuộc độ sâu của cây, O(depth), xấp xỉ O(log n_samples) với cây gần cân bằng.",
+      "gold": [{"gold_source_id": "tree", "gold_page": "tree:003", "evidence_quote": "Inference cost is independent of the splitter strategy. It depends only on the tree depth"}]
+    },
+    {
+      "id": "D02", "split": "dev", "type": "conditional_exception", "filter": null,
+      "question": "Tại sao Silhouette Coefficient có thể đánh giá thấp các cụm dựa trên mật độ như kết quả của DBSCAN?",
+      "expected_answer": "Chỉ số này thường cao hơn với cụm lồi (convex) so với các khái niệm cụm khác như cụm dựa trên mật độ của DBSCAN.",
+      "gold": [{"gold_source_id": "clustering", "gold_page": "clustering:019", "evidence_quote": "The Silhouette Coefficient is generally higher for convex clusters than other concepts of clusters, such as density based clusters like those obtained through DBSCAN."}]
+    },
+    {
+      "id": "D03", "split": "dev", "type": "paraphrase", "filter": null,
+      "question": "Khi nào việc co giãn từng mẫu về chuẩn đơn vị (unit norm) là hữu ích?",
+      "expected_answer": "Khi dùng dạng toàn phương như tích vô hướng hoặc kernel bất kỳ để đo độ tương đồng giữa các cặp mẫu.",
+      "gold": [{"gold_source_id": "preprocessing", "gold_page": "preprocessing:006", "evidence_quote": "This process can be useful if you plan to use a quadratic form such as the dot-product or any other kernel to quantify the similarity of any pair of samples."}]
+    },
+    {
+      "id": "D04", "split": "dev", "type": "conditional_exception", "filter": null,
+      "question": "Vì sao không nên xáo trộn dữ liệu trước khi cross-validation nếu các mẫu là bài báo được sắp xếp theo thời gian đăng?",
+      "expected_answer": "Xáo trộn sẽ dẫn tới mô hình overfit và điểm validation bị thổi phồng vì kiểm tra trên các mẫu giống mẫu train (gần nhau về thời gian).",
+      "gold": [{"gold_source_id": "cross_validation", "gold_page": "cross_validation:007", "evidence_quote": "if samples correspond to news articles, and are ordered by their time of publication, then shuffling the data will likely lead to a model that is overfit and an inflated validation score"}]
+    },
+    {
+      "id": "D05", "split": "dev", "type": "direct", "filter": null,
+      "question": "Tham số class_weight của SVC xử lý bài toán các lớp mất cân bằng như thế nào?",
+      "expected_answer": "class_weight là dict {class_label: value} với value > 0; nó đặt tham số C của lớp đó thành C * value.",
+      "gold": [{"gold_source_id": "svm", "gold_page": "svm:003", "evidence_quote": "sets the parameter C of class class_label to C * value"}]
+    },
+    {
+      "id": "D06", "split": "dev", "type": "paraphrase", "filter": null,
+      "question": "Biến thể Naive Bayes nào đặc biệt phù hợp với tập dữ liệu mất cân bằng?",
+      "expected_answer": "Complement Naive Bayes (ComplementNB), một điều chỉnh của Multinomial NB, dùng thống kê từ phần bù của mỗi lớp.",
+      "gold": [{"gold_source_id": "naive_bayes", "gold_page": "naive_bayes:002", "evidence_quote": "CNB is an adaptation of the standard multinomial naive Bayes (MNB) algorithm that is particularly suited for imbalanced data sets."}]
+    },
+    {
+      "id": "D07", "split": "dev", "type": "direct", "filter": null,
+      "question": "Balanced accuracy được tính như thế nào trong trường hợp phân loại nhị phân?",
+      "expected_answer": "Bằng trung bình cộng của sensitivity (true positive rate) và specificity (true negative rate).",
+      "gold": [{"gold_source_id": "model_evaluation", "gold_page": "model_evaluation:007", "evidence_quote": "In the binary case, balanced accuracy is equal to the arithmetic mean of sensitivity (true positive rate) and specificity (true negative rate)"}]
+    },
+    {
+      "id": "D08", "split": "dev", "type": "direct", "filter": null,
+      "question": "Isolation Forest nhận biết điểm bất thường dựa trên độ dài đường đi trong các cây ngẫu nhiên như thế nào?",
+      "expected_answer": "Phân hoạch ngẫu nhiên tạo ra đường đi ngắn hơn rõ rệt cho điểm bất thường; độ dài đường đi trung bình trên rừng là thước đo mức bình thường.",
+      "gold": [{"gold_source_id": "outlier_detection", "gold_page": "outlier_detection:003", "evidence_quote": "Random partitioning produces noticeably shorter paths for anomalies."}]
+    },
+    {
+      "id": "D09", "split": "dev", "type": "conditional_exception", "filter": null,
+      "question": "Khi số mẫu rất nhỏ so với số đặc trưng thì LassoLarsCV có lợi thế gì so với LassoCV khi chọn tham số alpha?",
+      "expected_answer": "LassoLarsCV thường chạy nhanh hơn LassoCV trong trường hợp đó.",
+      "gold": [{"gold_source_id": "linear_model", "gold_page": "linear_model:005", "evidence_quote": "if the number of samples is very small compared to the number of features, it is often faster than LassoCV"}]
+    },
+    {
+      "id": "D10", "split": "dev", "type": "conditional_exception", "filter": null,
+      "question": "Khi dùng nhiều metric cùng lúc (multimetric) với GridSearchCV thì tham số refit phải được đặt như thế nào?",
+      "expected_answer": "Phải đặt refit thành tên metric (string) dùng để tìm best_params_ và dựng best_estimator_ trên toàn bộ dữ liệu; nếu không refit thì đặt refit=False; để mặc định None sẽ gây lỗi.",
+      "gold": [{"gold_source_id": "grid_search", "gold_page": "grid_search:006", "evidence_quote": "When specifying multiple metrics, the refit parameter must be set to the metric (string) for which the best_params_ will be found and used to build the best_estimator_ on the whole dataset."}]
+    },
+    {
+      "id": "D11", "split": "dev", "type": "direct", "filter": null,
+      "question": "Mặc định các imputer của scikit-learn xử lý cột chỉ chứa toàn giá trị thiếu như thế nào?",
+      "expected_answer": "Mặc định loại bỏ (drop) các cột hoàn toàn trống; có thể dùng keep_empty_features=True để giữ lại.",
+      "gold": [{"gold_source_id": "impute", "gold_page": "impute:004", "evidence_quote": "By default, the scikit-learn imputers will drop fully empty features, i.e. columns containing only missing values."}]
+    },
+    {
+      "id": "D12", "split": "dev", "type": "paraphrase", "filter": null,
+      "question": "Tại sao không nên fit bộ hiệu chỉnh xác suất (calibrator) trên chính dữ liệu đã dùng để huấn luyện bộ phân loại?",
+      "expected_answer": "Vì calibrator sẽ bị thiên lệch: ánh xạ ra xác suất gần 0 và 1 hơn mức đúng do bộ phân loại tốt hơn trên dữ liệu huấn luyện.",
+      "gold": [{"gold_source_id": "calibration", "gold_page": "calibration:002", "evidence_quote": "Using the classifier output of training data to fit the calibrator would thus result in a biased calibrator that maps to probabilities closer to 0 and 1 than it should."}]
+    },
+    {
+      "id": "D13", "split": "dev", "type": "direct", "filter": null,
+      "question": "Giả định nào của inertia làm K-means hoạt động kém với các cụm kéo dài hoặc hình dạng không đều?",
+      "expected_answer": "Inertia giả định các cụm lồi và đẳng hướng (convex and isotropic), nên phản ứng kém với cụm kéo dài hoặc manifold hình dạng bất thường.",
+      "gold": [{"gold_source_id": "clustering", "gold_page": "clustering:001", "evidence_quote": "Inertia makes the assumption that clusters are convex and isotropic, which is not always the case. It responds poorly to elongated clusters, or manifolds with irregular shapes."}]
+    },
+    {
+      "id": "D14", "split": "dev", "type": "filter", "filter": {"field": "guide_section", "value": "Supervised learning"},
+      "question": "Estimator hồi quy bền vững nào xử lý tốt hơn các ngoại lai (outliers) lớn theo hướng y?",
+      "expected_answer": "RANSAC xử lý tốt hơn với ngoại lai lớn theo hướng y (tình huống phổ biến nhất).",
+      "gold": [{"gold_source_id": "linear_model", "gold_page": "linear_model:017", "evidence_quote": "RANSAC will deal better with large outliers in the y direction (most common situation)."}]
+    },
+    {
+      "id": "D15", "split": "dev", "type": "filter", "filter": {"field": "guide_section", "value": "Supervised learning"},
+      "question": "Những estimator nào hỗ trợ sẵn giá trị thiếu (missing values) mà không cần imputer?",
+      "expected_answer": "DecisionTree/ExtraTree (classifier và regressor) và HistGradientBoosting có hỗ trợ giá trị thiếu tích hợp sẵn.",
+      "gold": [
+        {"gold_source_id": "tree", "gold_page": "tree:008", "evidence_quote": "DecisionTreeClassifier, DecisionTreeRegressor have built-in support for missing values using splitter='best'"},
+        {"gold_source_id": "ensemble", "gold_page": "ensemble:001", "evidence_quote": "They also have built-in support for missing values, which avoids the need for an imputer."}
+      ]
+    },
+    {
+      "id": "D16", "split": "dev", "type": "paraphrase", "filter": null,
+      "question": "Shrinkage trong LDA giúp ích trong tình huống nào?",
+      "expected_answer": "Khi số mẫu huấn luyện nhỏ so với số đặc trưng: shrinkage là một dạng regularization cải thiện việc ước lượng ma trận hiệp phương sai.",
+      "gold": [{"gold_source_id": "lda_qda", "gold_page": "lda_qda:003", "evidence_quote": "Shrinkage is a form of regularization used to improve the estimation of covariance matrices in situations where the number of training samples is small compared to the number of features."}]
+    },
+    {
+      "id": "T01", "split": "test", "type": "conditional_exception", "filter": null,
+      "question": "Khi dữ liệu ảnh 64x64 pixel (4096 chiều) và chỉ cần giữ ít thành phần chính, nên dùng tùy chọn svd_solver nào của PCA và vì sao?",
+      "expected_answer": "svd_solver='randomized', vì chỉ cần ước lượng xấp xỉ các singular vector sẽ giữ lại nên hiệu quả hơn nhiều.",
+      "gold": [{"gold_source_id": "decomposition", "gold_page": "decomposition:001", "evidence_quote": "svd_solver='randomized' is very useful in that case: since we are going to drop most of the singular vectors it is much more efficient to limit the computation to an approximated estimate of the singular vectors we will keep"}]
+    },
+    {
+      "id": "T02", "split": "test", "type": "conditional_exception", "filter": null,
+      "question": "Giá trị mặc định tốt thường dùng cho max_features trong random forest khác nhau thế nào giữa bài toán hồi quy và phân loại?",
+      "expected_answer": "Hồi quy: max_features=1.0 (tương đương None, xét mọi đặc trưng); phân loại: max_features='sqrt'.",
+      "gold": [{"gold_source_id": "ensemble", "gold_page": "ensemble:005", "evidence_quote": "Empirical good default values are max_features=1.0 or equivalently max_features=None (always considering all features instead of a random subset) for regression problems, and max_features=\"sqrt\" (using a random subset of size sqrt(n_features)) for classification tasks"}]
+    },
+    {
+      "id": "T03", "split": "test", "type": "paraphrase", "filter": null,
+      "question": "NCA (Neighborhood Components Analysis) tối đa hóa đại lượng nào để cải thiện độ chính xác của phân loại láng giềng gần nhất?",
+      "expected_answer": "Một biến thể ngẫu nhiên (stochastic) của điểm leave-one-out k-nearest neighbors trên tập huấn luyện.",
+      "gold": [{"gold_source_id": "neighbors", "gold_page": "neighbors:008", "evidence_quote": "The algorithm directly maximizes a stochastic variant of the leave-one-out k-nearest neighbors (KNN) score on the training set."}]
+    },
+    {
+      "id": "T04", "split": "test", "type": "direct", "filter": null,
+      "question": "Mật độ phần tử khác 0 mặc định của SparseRandomProjection được chọn như thế nào?",
+      "expected_answer": "Mặc định là mật độ tối thiểu theo khuyến nghị của Ping Li et al., bằng 1/sqrt(n_features).",
+      "gold": [{"gold_source_id": "random_projection", "gold_page": "random_projection:001", "evidence_quote": "By default the density of non zero elements is set to the minimum density as recommended by Ping Li et al.: $1 / \\sqrt{n_{\\text{features}}}$."}]
+    },
+    {
+      "id": "T05", "split": "test", "type": "filter", "filter": {"field": "guide_section", "value": "Unsupervised learning"},
+      "question": "Tham số bandwidth ảnh hưởng thế nào đến độ mượt của ước lượng mật độ bằng kernel?",
+      "expected_answer": "Bandwidth lớn cho phân phối rất mượt (bias cao); bandwidth nhỏ cho phân phối không mượt (variance cao).",
+      "gold": [{"gold_source_id": "density", "gold_page": "density:001", "evidence_quote": "A large bandwidth leads to a very smooth (i.e. high-bias) density distribution. A small bandwidth leads to an unsmooth (i.e. high-variance) density distribution."}]
+    },
+    {
+      "id": "T06", "split": "test", "type": "filter", "filter": {"field": "guide_section", "value": "Inspection"},
+      "question": "Vì sao độ quan trọng đặc trưng dựa trên impurity của cây có thể gây sai lệch?",
+      "expected_answer": "Nó thiên lệch mạnh, ưu tiên các đặc trưng có nhiều giá trị (high cardinality, thường là số) hơn đặc trưng ít giá trị như nhị phân hoặc categorical nhỏ.",
+      "gold": [{"gold_source_id": "permutation_importance", "gold_page": "permutation_importance:001", "evidence_quote": "impurity-based feature importance for trees is strongly biased and favor high cardinality features (typically numerical features) over low cardinality features"}]
+    }
+  ]
+}

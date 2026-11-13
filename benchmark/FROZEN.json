@@ -1,0 +1,20 @@
+{
+  "questions_sha256": "abcafcf37e0de28f97ca3702d405089d2ef7d2512a36b6e11e5bbc57abbbef9d",
+  "selection_criteria_sha256": "a7bb0a132fb757ee88af1e842531ce6c3addd119cff14fb03feaecb03ea40e97",
+  "frozen_at_utc": "2026-11-13T09:59:31+00:00",
+  "note": "Hash này được run_experiments.py kiểm tra lại; sửa questions.json sau thời điểm này phải được ghi rõ.",
+  "total": 22,
+  "dev": 16,
+  "test": 6,
+  "filter_questions": 4,
+  "filter_in_test": 2,
+  "types": {
+    "conditional_exception": 6,
+    "direct": 7,
+    "filter": 4,
+    "paraphrase": 5
+  },
+  "dev_test_shared_gold_docs": [
+    "ensemble"
+  ]
+}

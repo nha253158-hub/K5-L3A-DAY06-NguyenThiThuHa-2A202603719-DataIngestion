@@ -1,0 +1,123 @@
+position_id,unit_id,offset,strategy,chunk_id,char_start,char_end,chunk_text,label_0_1_2,reason,grader,reviewed_by_author
+P01,biclustering:000,1232,B,B:biclustering:000:002,1233,1720,"If each row and each column belongs to exactly one bicluster, then
+rearranging the rows and columns of the data matrix reveals the
+biclusters on the diagonal. Here is an example of this structure
+where biclusters have higher average values than the other rows and
+columns:
+
+In the checkerboard case, each row belongs to all column clusters, and
+each column belongs to all row clusters. Here is an example of this
+structure where the variance of the values within each bicluster is
+small:",2,Đoạn đầy đủ về cấu trúc block-diagonal/checkerboard; hình minh họa bị bỏ khi chuẩn hóa nhưng ý trọn vẹn.,"claude-llm-assisted (chunker B v0, trước khi sửa lỗi)",
+P02,clustering:016,2804,B,B:clustering:016:004,2430,2903,"- Contrary to inertia, MI-based measures require the knowledge of the ground
+  truth classes while almost never available in practice or requires manual
+  assignment by human annotators (as in the supervised learning setting).
+
+  However MI-based measures can also be useful in purely unsupervised setting
+  as a building block for a Consensus Index that can be used for clustering
+  model selection.
+
+- NMI and MI are not adjusted against chance.
+
+Mathematical formulation",2,"Hai gạch đầu dòng về hạn chế của MI/NMI trọn ý; cuối chunk là tiêu đề mồ côi ""Mathematical formulation"" (lỗi nhỏ).","claude-llm-assisted (chunker B v0, trước khi sửa lỗi)",
+P03,cross_validation:006,1504,B,B:cross_validation:006:002,1185,1855,"### Cross validation of time series data
+
+Time series data is characterized by the correlation between observations
+that are near in time (autocorrelation). However, classical
+cross-validation techniques such as KFold and
+ShuffleSplit assume the samples are independent and
+identically distributed, and would result in unreasonable correlation
+between training and testing instances (yielding poor estimates of
+generalization error) on time series data. Therefore, it is very important
+to evaluate our model for time series data on the ""future"" observations
+least like those that are used to train the model. To achieve this, one
+solution is provided by TimeSeriesSplit.",2,"Có tiêu đề, đoạn về time series CV trọn vẹn tới câu giới thiệu TimeSeriesSplit.","claude-llm-assisted (chunker B v0, trước khi sửa lỗi)",
+P04,ensemble:012,1275,B,B:ensemble:012:003,1269,1356,"concentrate on the examples that are missed by the previous ones in the sequence
+[HTF].",0,"Chỉ là đoạn đuôi 87 ký tự ""concentrate on the examples..."" bị cắt giữa câu, không có chủ thể -> không hiểu được.","claude-llm-assisted (chunker B v0, trước khi sửa lỗi)",
+P05,grid_search:006,1617,B,B:grid_search:006:003,1490,2469,"### Composite estimators and parameter spaces
+
+GridSearchCV and RandomizedSearchCV allow searching over
+parameters of composite or nested estimators such as
+Pipeline,
+ColumnTransformer,
+VotingClassifier or
+CalibratedClassifierCV using a dedicated
+<estimator>__<parameter> syntax:
+
+  >>> from sklearn.model_selection import GridSearchCV
+  >>> from sklearn.calibration import CalibratedClassifierCV
+  >>> from sklearn.ensemble import RandomForestClassifier
+  >>> from sklearn.datasets import make_moons
+  >>> X, y = make_moons()
+  >>> calibrated_forest = CalibratedClassifierCV(
+  ...    estimator=RandomForestClassifier(n_estimators=10))
+  >>> param_grid = {
+  ...    'estimator__max_depth': [2, 4, 6, 8]}
+  >>> search = GridSearchCV(calibrated_forest, param_grid, cv=5)
+  >>> search.fit(X, y)
+  GridSearchCV(cv=5,
+               estimator=CalibratedClassifierCV(estimator=RandomForestClassifier(n_estimators=10)),
+               param_grid={'estimator__max_depth': [2, 4, 6, 8]})",2,Tiêu đề + mô tả + ví dụ code đầy đủ về tìm tham số trên composite estimator.,"claude-llm-assisted (chunker B v0, trước khi sửa lỗi)",
+P06,linear_model:008,1261,B,B:linear_model:008:003,1201,1758,"## Orthogonal Matching Pursuit (OMP)
+
+OrthogonalMatchingPursuit and orthogonal_mp implement the OMP
+algorithm for approximating the fit of a linear model with constraints imposed
+on the number of non-zero coefficients (i.e. the $\ell_0$ pseudo-norm).
+
+Being a forward feature selection method like least_angle_regression,
+orthogonal matching pursuit can approximate the optimum solution vector with a
+fixed number of non-zero elements:
+
+Math:
+    \underset{w}{\operatorname{arg\,min\,}}  ||y - Xw||_2^2 \text{ subject to } ||_0 \leq n_{\text{nonzero_coefs}}",2,"Mục OMP: tiêu đề, định nghĩa, tính chất và công thức tối ưu trọn vẹn.","claude-llm-assisted (chunker B v0, trước khi sửa lỗi)",
+P07,model_evaluation:001,999,B,B:model_evaluation:001:002,771,1248,"* Metric functions: The sklearn.metrics module implements functions
+  assessing prediction error for specific purposes. These metrics are detailed
+  in sections on classification_metrics,
+  multilabel_ranking_metrics, regression_metrics and
+  clustering_metrics.
+
+Finally, dummy_estimators are useful to get a baseline
+value of those metrics for random predictions.
+
+See also:
+
+For ""pairwise"" metrics, between samples and not estimators or
+predictions, see the metrics section.",2,"Bullet ""Metric functions"" và đoạn dummy_estimators/See also trọn ý; thiếu câu dẫn của danh sách nhưng vẫn hiểu.","claude-llm-assisted (chunker B v0, trước khi sửa lỗi)",
+P08,model_evaluation:029,1115,B,B:model_evaluation:029:002,707,1292,"In the particular case where the true target is constant, the Explained
+Variance score is not finite: it is either NaN (perfect predictions) or
+-Inf (imperfect predictions). Such non-finite scores may prevent correct
+model optimization such as grid-search cross-validation to be performed
+correctly. For this reason the default behaviour of
+explained_variance_score is to replace them with 1.0 (perfect
+predictions) or 0.0 (imperfect predictions). You can set the force_finite
+parameter to False to prevent this fix from happening and fallback on the
+original Explained Variance score.",2,Đoạn trọn ý về Explained Variance khi target hằng số và tham số force_finite.,"claude-llm-assisted (chunker B v0, trước khi sửa lỗi)",
+P09,neighbors:007,2055,B,B:neighbors:007:003,1813,2307,"Second, precomputing the graph can give finer control on the nearest neighbors
+estimation, for instance enabling multiprocessing though the parameter
+n_jobs, which might not be available in all estimators.
+
+Finally, the precomputation can be performed by custom estimators to use
+different implementations, such as approximate nearest neighbors methods, or
+implementation with special data types. The precomputed neighbors
+sparse graph needs to be formatted as in
+radius_neighbors_graph output:",1,"Bắt đầu bằng ""Second,"" (thiếu mục ""First"") và kết thúc ngay sau ""output:""; hiểu một phần.","claude-llm-assisted (chunker B v0, trước khi sửa lỗi)",
+P10,preprocessing:008,2855,B,B:preprocessing:008:004,2455,3199,"Similarly, OneHotEncoder can be configured to group together infrequent
+categories:
+
+   >>> enc = preprocessing.OneHotEncoder(min_frequency=6, sparse_output=False).fit(X)
+   >>> enc.infrequent_categories_
+   [array(['dog', 'snake'], dtype=object)]
+   >>> enc.transform(np.array([['dog'], ['cat'], ['rabbit'], ['snake']]))
+   array([[0., 0., 1.],
+          [1., 0., 0.],
+          [0., 1., 0.],
+          [0., 0., 1.]])
+
+By setting handle_unknown to 'infrequent_if_exist', unknown categories will
+be considered infrequent:
+
+   >>> enc = preprocessing.OneHotEncoder(
+   ...    handle_unknown='infrequent_if_exist', sparse_output=False, min_frequency=6)
+   >>> enc = enc.fit(X)
+   >>> enc.transform(np.array([['dragon']]))
+   array([[0., 0., 1.]])",2,"Ví dụ OneHotEncoder gom hạng mục hiếm + handle_unknown, code và kết quả đầy đủ; ""Similarly"" cần ngữ cảnh nhưng vẫn rõ.","claude-llm-assisted (chunker B v0, trước khi sửa lỗi)",

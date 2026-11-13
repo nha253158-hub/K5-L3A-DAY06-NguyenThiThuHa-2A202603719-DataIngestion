@@ -1,0 +1,43 @@
+module,guide_section,guide_file
+linear_model,Supervised learning,supervised_learning.rst
+lda_qda,Supervised learning,supervised_learning.rst
+kernel_ridge,Supervised learning,supervised_learning.rst
+svm,Supervised learning,supervised_learning.rst
+sgd,Supervised learning,supervised_learning.rst
+neighbors,Supervised learning,supervised_learning.rst
+gaussian_process,Supervised learning,supervised_learning.rst
+cross_decomposition,Supervised learning,supervised_learning.rst
+naive_bayes,Supervised learning,supervised_learning.rst
+tree,Supervised learning,supervised_learning.rst
+ensemble,Supervised learning,supervised_learning.rst
+multiclass,Supervised learning,supervised_learning.rst
+feature_selection,Supervised learning,supervised_learning.rst
+semi_supervised,Supervised learning,supervised_learning.rst
+isotonic,Supervised learning,supervised_learning.rst
+calibration,Supervised learning,supervised_learning.rst
+neural_networks_supervised,Supervised learning,supervised_learning.rst
+mixture,Unsupervised learning,unsupervised_learning.rst
+manifold,Unsupervised learning,unsupervised_learning.rst
+clustering,Unsupervised learning,unsupervised_learning.rst
+biclustering,Unsupervised learning,unsupervised_learning.rst
+decomposition,Unsupervised learning,unsupervised_learning.rst
+covariance,Unsupervised learning,unsupervised_learning.rst
+outlier_detection,Unsupervised learning,unsupervised_learning.rst
+density,Unsupervised learning,unsupervised_learning.rst
+neural_networks_unsupervised,Unsupervised learning,unsupervised_learning.rst
+cross_validation,Model selection and evaluation,model_selection.rst
+grid_search,Model selection and evaluation,model_selection.rst
+classification_threshold,Model selection and evaluation,model_selection.rst
+model_evaluation,Model selection and evaluation,model_selection.rst
+learning_curve,Model selection and evaluation,model_selection.rst
+compose,Dataset transformations,data_transforms.rst
+feature_extraction,Dataset transformations,data_transforms.rst
+preprocessing,Dataset transformations,data_transforms.rst
+impute,Dataset transformations,data_transforms.rst
+unsupervised_reduction,Dataset transformations,data_transforms.rst
+random_projection,Dataset transformations,data_transforms.rst
+kernel_approximation,Dataset transformations,data_transforms.rst
+metrics,Dataset transformations,data_transforms.rst
+preprocessing_targets,Dataset transformations,data_transforms.rst
+partial_dependence,Inspection,inspection.rst
+permutation_importance,Inspection,inspection.rst

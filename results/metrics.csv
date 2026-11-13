@@ -1,0 +1,16 @@
+config,subset,n_questions,hit_at_1,evidence_hit_at_3,page_hit_at_3,filter_compliant,n_filter_questions
+A,dev,16,7,9,12,N/A,2
+A,test,6,2,3,6,N/A,2
+A,all,22,9,12,18,N/A,4
+A,dev_filter_questions,2,0,0,1,N/A,2
+A,test_filter_questions,2,0,0,2,N/A,2
+B,dev,16,10,11,13,N/A,2
+B,test,6,3,5,6,N/A,2
+B,all,22,13,16,19,N/A,4
+B,dev_filter_questions,2,0,0,1,N/A,2
+B,test_filter_questions,2,0,1,2,N/A,2
+C,dev,16,10,12,13,2/2,2
+C,test,6,3,5,6,2/2,2
+C,all,22,13,17,19,4/4,4
+C,dev_filter_questions,2,0,1,1,2/2,2
+C,test_filter_questions,2,0,1,2,2/2,2

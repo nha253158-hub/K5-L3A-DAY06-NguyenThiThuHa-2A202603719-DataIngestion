@@ -1,10 +1,6 @@
-__pycache__/
-.venv/
 .env
+.venv/
+__pycache__/
 *.pyc
-
-.env.*
-!.env.example
-.DS_Store
-.pytest_cache/
-*.sqlite
+# chỉ mục vector dựng lại được bằng src/ingest.py
+results/chroma_db/

@@ -1,0 +1,107 @@
+{
+  "config": "A",
+  "params": {
+    "strategy": "fixed_size",
+    "size": 500,
+    "overlap": 50
+  },
+  "embedding_model": "intfloat/multilingual-e5-small",
+  "model_revision": null,
+  "embedding_dim": 384,
+  "doc_prefix": "passage: ",
+  "query_prefix": "query: ",
+  "normalized_l2": true,
+  "vector_store": "chromadb 1.5.9 PersistentClient, cosine (HNSW approximate)",
+  "collection": "day06_A",
+  "db_path": "results/chroma_db",
+  "seed": 42,
+  "chars": {
+    "min": 51,
+    "p10": 377,
+    "median": 500,
+    "mean": 469.2,
+    "p90": 500,
+    "max": 500,
+    "sum": 976430
+  },
+  "tokens": {
+    "min": 10,
+    "p10": 102,
+    "median": 130,
+    "mean": 134.4,
+    "p90": 182,
+    "max": 312,
+    "sum": 279694
+  },
+  "n_chunks_over_512_tokens": 0,
+  "ingest": {
+    "n_chunks": 2081,
+    "n_embedded_this_run": 2081,
+    "n_skipped_unchanged": 0,
+    "n_stale_deleted": 0,
+    "collection_count_after": 2081,
+    "seconds_chunking": 0.039,
+    "seconds_embedding": 102.508,
+    "seconds_store": 2.089,
+    "seconds_total": 104.642,
+    "cpu_seconds": 196.786
+  },
+  "versions": {
+    "python": "3.13.18",
+    "sentence_transformers": "6.3.0",
+    "torch": "2.15.0+cu132",
+    "transformers": "5.22.2",
+    "numpy": "2.5.3",
+    "chromadb": "1.5.9"
+  },
+  "hardware": {
+    "cpus": 2,
+    "platform": "Linux-6.18.44-fc-v445-x86_64-with-glibc2.39"
+  },
+  "peak_rss_mb": 2028.3,
+  "cost_usd": 0.0,
+  "cost_note": "model chạy local, không dùng dịch vụ trả phí",
+  "finished_at_utc": "2026-11-13T10:31:00+00:00",
+  "idempotency": {
+    "reingest_same_corpus": {
+      "n_chunks": 2081,
+      "n_embedded_this_run": 0,
+      "n_skipped_unchanged": 2081,
+      "n_stale_deleted": 0,
+      "collection_count_after": 2081,
+      "seconds_chunking": 0.048,
+      "seconds_embedding": 0.0,
+      "seconds_store": 0.0,
+      "seconds_total": 0.222,
+      "cpu_seconds": 0.249
+    },
+    "no_duplicates": true,
+    "document_change_simulation": {
+      "first_load": {
+        "n_chunks": 29,
+        "n_embedded_this_run": 29,
+        "n_skipped_unchanged": 0,
+        "n_stale_deleted": 0,
+        "collection_count_after": 29,
+        "seconds_chunking": 0.0,
+        "seconds_embedding": 1.303,
+        "seconds_store": 0.031,
+        "seconds_total": 1.337,
+        "cpu_seconds": 2.592
+      },
+      "after_edit_of_one_page": {
+        "n_chunks": 29,
+        "n_embedded_this_run": 1,
+        "n_skipped_unchanged": 28,
+        "n_stale_deleted": 0,
+        "collection_count_after": 29,
+        "seconds_chunking": 0.0,
+        "seconds_embedding": 0.041,
+        "seconds_store": 0.021,
+        "seconds_total": 0.066,
+        "cpu_seconds": 0.101
+      },
+      "only_changed_page_reembedded": true
+    }
+  }
+}

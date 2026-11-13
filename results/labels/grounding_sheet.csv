@@ -1,0 +1,648 @@
+config,question_id,question,expected_answer,gold_pages,top1_chunk,top3_chunk_ids,top3_texts,label_0_1_2,reason,grader,reviewed_by_author
+A,T01,"Khi dữ liệu ảnh 64x64 pixel (4096 chiều) và chỉ cần giữ ít thành phần chính, nên dùng tùy chọn svd_solver nào của PCA và vì sao?","svd_solver='randomized', vì chỉ cần ước lượng xấp xỉ các singular vector sẽ giữ lại nên hiệu quả hơn nhiều.",decomposition:001,A:decomposition:001:001,A:decomposition:001:001 | A:decomposition:001:000 | A:compose:002:003,"[1] A:decomposition:001:001 (score 0.88238)
+rinsic dimensionality of the data is much lower than 4096 since all
+pictures of human faces look somewhat alike.
+The samples lie on a manifold of much lower
+dimension (say around 200 for instance). The PCA algorithm can be used
+to linearly transform the data while both reducing the dimensionality
+and preserving most of the explained variance at the same time.
+
+The class PCA used with the optional parameter
+svd_solver='randomized' is very useful in that case: since we are going
+to drop most of th
+=====
+[2] A:decomposition:001:000 (score 0.85852)
+### PCA using randomized SVD
+
+It is often interesting to project data to a lower-dimensional
+space that preserves most of the variance, by dropping the singular vector
+of components associated with lower singular values.
+
+For instance, if we work with 64x64 pixel gray-level pictures
+for face recognition,
+the dimensionality of the data is 4096 and it is slow to train an
+RBF support vector machine on such wide data. Furthermore we know that
+the intrinsic dimensionality of the data is much lower th
+=====
+[3] A:compose:002:003 (score 0.85295)
+l instance such as:
+
+    >>> from sklearn.datasets import load_digits
+    >>> X_digits, y_digits = load_digits(return_X_y=True)
+    >>> pca1 = PCA(n_components=10)
+    >>> svm1 = SVC()
+    >>> pipe = Pipeline([('reduce_dim', pca1), ('clf', svm1)])
+    >>> pipe.fit(X_digits, y_digits)
+    Pipeline(steps=[('reduce_dim', PCA(n_components=10)), ('clf', SVC())])
+    >>> # The pca instance can be inspected directly
+    >>> pca1.components_.shape
+    (10, 64)
+
+Enabling caching triggers a clone of the t",,,,
+A,T02,Giá trị mặc định tốt thường dùng cho max_features trong random forest khác nhau thế nào giữa bài toán hồi quy và phân loại?,"Hồi quy: max_features=1.0 (tương đương None, xét mọi đặc trưng); phân loại: max_features='sqrt'.",ensemble:005,A:ensemble:005:001,A:ensemble:005:001 | A:ensemble:005:002 | A:ensemble:004:002,"[1] A:ensemble:005:001 (score 0.8775)
+tion of variance, but
+also the greater the increase in bias. Empirical good default values are
+max_features=1.0 or equivalently max_features=None (always considering
+all features instead of a random subset) for regression problems, and
+max_features=""sqrt"" (using a random subset of size sqrt(n_features))
+for classification tasks (where n_features is the number of features in
+the data). The default value of max_features=1.0 is equivalent to bagged
+trees and more randomness can be achieved by setti
+=====
+[2] A:ensemble:005:002 (score 0.8587)
+trees and more randomness can be achieved by setting smaller values (e.g. 0.3
+is a typical default in the literature). Good results are often achieved when
+setting max_depth=None in combination with min_samples_split=2 (i.e.,
+when fully developing the trees). Bear in mind though that these values are
+usually not optimal, and might result in models that consume a lot of RAM.
+The best parameter values should always be cross-validated. In addition, note
+that in random forests, bootstrap samples are
+=====
+[3] A:ensemble:004:002 (score 0.85828)
+ples=10000, n_features=10, centers=100,
+    ...     random_state=0)
+
+    >>> clf = DecisionTreeClassifier(max_depth=None, min_samples_split=2,
+    ...     random_state=0)
+    >>> scores = cross_val_score(clf, X, y, cv=5)
+    >>> scores.mean()
+    np.float64(0.98)
+
+    >>> clf = RandomForestClassifier(n_estimators=10, max_depth=None,
+    ...     min_samples_split=2, random_state=0)
+    >>> scores = cross_val_score(clf, X, y, cv=5)
+    >>> scores.mean()
+    np.float64(0.999)
+
+    >>> clf = ExtraTr",,,,
+A,T03,NCA (Neighborhood Components Analysis) tối đa hóa đại lượng nào để cải thiện độ chính xác của phân loại láng giềng gần nhất?,Một biến thể ngẫu nhiên (stochastic) của điểm leave-one-out k-nearest neighbors trên tập huấn luyện.,neighbors:008,A:neighbors:009:001,A:neighbors:009:001 | A:neighbors:008:000 | A:neighbors:008:002,"[1] A:neighbors:009:001 (score 0.87989)
+ntAnalysis) and
+Neighborhood Component Analysis (NeighborhoodComponentsAnalysis) on
+the Digits dataset, a dataset with size $n_{samples} = 1797$ and
+$n_{features} = 64$. The data set is split into a training and a test set
+of equal size, then standardized. For evaluation the 3-nearest neighbor
+classification accuracy is computed on the 2-dimensional projected points found
+by each method. Each data sample belongs to one of 10 classes.
+
+### Mathematical formulation
+
+The goal of NCA is to learn an 
+=====
+[2] A:neighbors:008:000 (score 0.87236)
+## Neighborhood Components Analysis
+
+Neighborhood Components Analysis (NCA, NeighborhoodComponentsAnalysis)
+is a distance metric learning algorithm which aims to improve the accuracy of
+nearest neighbors classification compared to the standard Euclidean distance.
+The algorithm directly maximizes a stochastic variant of the leave-one-out
+k-nearest neighbors (KNN) score on the training set. It can also learn a
+low-dimensional linear projection of data that can be used for data
+visualization and fa
+=====
+[3] A:neighbors:008:002 (score 0.86253)
+nt. In
+the original space, sample 3 has many stochastic neighbors from various
+classes, so the right class is not very likely. However, in the projected space
+learned by NCA, the only stochastic neighbors with non-negligible weight are
+from the same class as sample 3, guaranteeing that the latter will be well
+classified. See the mathematical formulation
+for more details.
+
+### Classification
+
+Combined with a nearest neighbors classifier (KNeighborsClassifier),
+NCA is attractive for classification",,,,
+A,T04,Mật độ phần tử khác 0 mặc định của SparseRandomProjection được chọn như thế nào?,"Mặc định là mật độ tối thiểu theo khuyến nghị của Ping Li et al., bằng 1/sqrt(n_features).",random_projection:001,A:random_projection:001:003,A:random_projection:001:003 | A:random_projection:001:001 | A:metrics:002:003,"[1] A:random_projection:001:003 (score 0.84264)
+ce.
+By default the density of non zero elements is set to the minimum density as
+recommended by Ping Li et al.: $1 / \sqrt{n_{\text{features}}}$.
+
+Here is a small excerpt which illustrates how to use the sparse random
+projection transformer:
+
+  >>> import numpy as np
+  >>> from sklearn import random_projection
+  >>> X = np.random.rand(100, 10000)
+  >>> transformer = random_projection.SparseRandomProjection()
+  >>> X_new = transformer.fit_transform(X)
+  >>> X_new.shape
+  (100, 3947)
+
+## Inverse T
+=====
+[2] A:random_projection:001:001 (score 0.83789)
+000)
+  >>> transformer = random_projection.GaussianRandomProjection()
+  >>> X_new = transformer.fit_transform(X)
+  >>> X_new.shape
+  (100, 3947)
+
+## Sparse random projection
+
+The SparseRandomProjection reduces the
+dimensionality by projecting the original input space using a sparse
+random matrix.
+
+Sparse random matrices are an alternative to dense Gaussian random
+projection matrix that guarantees similar embedding quality while being much
+more memory efficient and allowing faster computation of 
+=====
+[3] A:metrics:002:003 (score 0.83347)
+puted"":
+
+    >>> from sklearn.svm import SVC
+    >>> from sklearn.metrics.pairwise import chi2_kernel
+    >>> X = [[0, 1], [1, 0], [.2, .8], [.7, .3]]
+    >>> y = [0, 1, 0, 1]
+    >>> K = chi2_kernel(X, gamma=.5)
+    >>> K
+    array([[1.        , 0.36787944, 0.89483932, 0.58364548],
+           [0.36787944, 1.        , 0.51341712, 0.83822343],
+           [0.89483932, 0.51341712, 1.        , 0.7768366 ],
+           [0.58364548, 0.83822343, 0.7768366 , 1.        ]])
+
+    >>> svm = SVC(kernel='preco",,,,
+A,T05,Tham số bandwidth ảnh hưởng thế nào đến độ mượt của ước lượng mật độ bằng kernel?,Bandwidth lớn cho phân phối rất mượt (bias cao); bandwidth nhỏ cho phân phối không mượt (variance cao).,density:001,A:kernel_ridge:000:002,A:kernel_ridge:000:002 | A:outlier_detection:001:005 | A:density:001:002,"[1] A:kernel_ridge:000:002 (score 0.83103)
+g figure compares KernelRidge and
+SVR on an artificial dataset, which consists of a
+sinusoidal target function and strong noise added to every fifth datapoint.
+The learned model of KernelRidge and SVR is
+plotted, where both complexity/regularization and bandwidth of the RBF kernel
+have been optimized using grid-search. The learned functions are very
+similar; however, fitting KernelRidge is approximately seven times
+faster than fitting SVR (both with grid-search).
+However, prediction of 100,000 t
+=====
+[2] A:outlier_detection:001:005 (score 0.83069)
+ment.
+
+The One-Class SVM has been introduced by Schölkopf et al. for that purpose
+and implemented in the svm module in the
+svm.OneClassSVM object. It requires the choice of a
+kernel and a scalar parameter to define a frontier.  The RBF kernel is
+usually chosen although there exists no exact formula or algorithm to
+set its bandwidth parameter. This is the default in the scikit-learn
+implementation. The nu parameter, also known as the margin of
+the One-Class SVM, corresponds to the probability of 
+=====
+[3] A:density:001:002 (score 0.82808)
+, [3, 2]])
+   >>> kde = KernelDensity(kernel='gaussian', bandwidth=0.2).fit(X)
+   >>> kde.score_samples(X)
+   array([-0.41075698, -0.41075698, -0.41076071, -0.41075698, -0.41075698,
+          -0.41076071])
+
+Here we have used kernel='gaussian', as seen above.
+Mathematically, a kernel is a positive function $K(x;h)$
+which is controlled by the bandwidth parameter $h$.
+Given this kernel form, the density estimate at a point $y$ within
+a group of points $x_i; i=1, \cdots, N$ is given by:
+
+Math:
+    \",,,,
+A,T06,Vì sao độ quan trọng đặc trưng dựa trên impurity của cây có thể gây sai lệch?,"Nó thiên lệch mạnh, ưu tiên các đặc trưng có nhiều giá trị (high cardinality, thường là số) hơn đặc trưng ít giá trị như nhị phân hoặc categorical nhỏ.",permutation_importance:001,A:permutation_importance:001:001,A:permutation_importance:001:001 | A:ensemble:006:003 | A:permutation_importance:001:004,"[1] A:permutation_importance:001:001 (score 0.83833)
+rsion of the data named $\tilde{D}_{k,j}$.
+    - Compute the score $s_{k,j}$ of model $m$ on corrupted data
+      $\tilde{D}_{k,j}$.
+
+  - Compute importance $i_j$ for feature $f_j$ defined as:
+
+Math:
+    i_j = s - \frac{1}{K} \sum_{k=1}^{K} s_{k,j}
+
+## Relation to impurity-based importance in trees
+
+Tree-based models provide an alternative measure of feature importances
+based on the mean decrease in impurity
+(MDI). Impurity is quantified by the splitting criterion of the decision trees
+(Gini, Lo
+=====
+[2] A:ensemble:006:003 (score 0.83229)
+ decrease in impurity
+from splitting them to create a normalized estimate of the predictive power
+of that feature.
+
+By averaging the estimates of predictive ability over several randomized
+trees one can reduce the variance of such an estimate and use it
+for feature selection. This is known as the mean decrease in impurity, or MDI.
+Refer to [L2014] for more information on MDI and feature importance
+evaluation with Random Forests.
+
+Warning:
+
+The impurity-based feature importances computed on tree-
+=====
+[3] A:permutation_importance:001:004 (score 0.8282)
+ons of impurity-based feature
+importance in contrast to permutation-based feature importance:
+(example: plot_permutation_importance.py).
+
+## Misleading values on strongly correlated features
+
+When two features are correlated and one of the features is permuted, the model
+still has access to the latter through its correlated feature. This results in a
+lower reported importance value for both features, though they might actually
+be important.
+
+The figure below shows the permutation feature importa",,,,
+B,T01,"Khi dữ liệu ảnh 64x64 pixel (4096 chiều) và chỉ cần giữ ít thành phần chính, nên dùng tùy chọn svd_solver nào của PCA và vì sao?","svd_solver='randomized', vì chỉ cần ước lượng xấp xỉ các singular vector sẽ giữ lại nên hiệu quả hơn nhiều.",decomposition:001,B:decomposition:001:002,B:decomposition:001:002 | B:decomposition:001:005 | B:decomposition:001:001,"[1] B:decomposition:001:002 (score 0.87111)
+The class PCA used with the optional parameter
+svd_solver='randomized' is very useful in that case: since we are going
+to drop most of the singular vectors it is much more efficient to limit the
+computation to an approximated estimate of the singular vectors we will keep
+to actually perform the transform.
+=====
+[2] B:decomposition:001:005 (score 0.85792)
+Note: the implementation of inverse_transform in PCA with
+svd_solver='randomized' is not the exact inverse transform of
+transform even when whiten=False (default).
+=====
+[3] B:decomposition:001:001 (score 0.85763)
+For instance, if we work with 64x64 pixel gray-level pictures
+for face recognition,
+the dimensionality of the data is 4096 and it is slow to train an
+RBF support vector machine on such wide data. Furthermore we know that
+the intrinsic dimensionality of the data is much lower than 4096 since all
+pictures of human faces look somewhat alike.
+The samples lie on a manifold of much lower
+dimension (say around 200 for instance). The PCA algorithm can be used
+to linearly transform the data while both reducing the dimensionality
+and preserving most of the explained variance at the same time.",,,,
+B,T02,Giá trị mặc định tốt thường dùng cho max_features trong random forest khác nhau thế nào giữa bài toán hồi quy và phân loại?,"Hồi quy: max_features=1.0 (tương đương None, xét mọi đặc trưng); phân loại: max_features='sqrt'.",ensemble:005,B:ensemble:005:001,B:ensemble:005:001 | B:ensemble:005:002 | B:grid_search:003:017,"[1] B:ensemble:005:001 (score 0.87198)
+Empirical good default values are
+max_features=1.0 or equivalently max_features=None (always considering
+all features instead of a random subset) for regression problems, and
+max_features=""sqrt"" (using a random subset of size sqrt(n_features))
+for classification tasks (where n_features is the number of features in
+the data). The default value of max_features=1.0 is equivalent to bagged
+trees and more randomness can be achieved by setting smaller values (e.g. 0.3
+is a typical default in the literature). 
+=====
+[2] B:ensemble:005:002 (score 0.86174)
+Good results are often achieved when
+setting max_depth=None in combination with min_samples_split=2 (i.e.,
+when fully developing the trees). Bear in mind though that these values are
+usually not optimal, and might result in models that consume a lot of RAM.
+The best parameter values should always be cross-validated. In addition, note
+that in random forests, bootstrap samples are used by default
+(bootstrap=True) while the default strategy for extra-trees is to use the
+whole dataset (bootstrap=False). 
+=====
+[3] B:grid_search:003:017 (score 0.85171)
+[2, 5, 10]}
+    >>> base_estimator = RandomForestClassifier(random_state=0)
+    >>> X, y = make_classification(n_samples=1000, random_state=0)
+    >>> sh = HalvingGridSearchCV(base_estimator, param_grid, cv=5,
+    ...                          factor=2, resource='n_estimators',
+    ...                          max_resources=30).fit(X, y)
+    >>> sh.best_estimator_
+    RandomForestClassifier(max_depth=5, n_estimators=24, random_state=0)",,,,
+B,T03,NCA (Neighborhood Components Analysis) tối đa hóa đại lượng nào để cải thiện độ chính xác của phân loại láng giềng gần nhất?,Một biến thể ngẫu nhiên (stochastic) của điểm leave-one-out k-nearest neighbors trên tập huấn luyện.,neighbors:008,B:neighbors:008:000,B:neighbors:008:000 | B:neighbors:009:000 | B:neighbors:008:003,"[1] B:neighbors:008:000 (score 0.87139)
+## Neighborhood Components Analysis
+
+Neighborhood Components Analysis (NCA, NeighborhoodComponentsAnalysis)
+is a distance metric learning algorithm which aims to improve the accuracy of
+nearest neighbors classification compared to the standard Euclidean distance.
+The algorithm directly maximizes a stochastic variant of the leave-one-out
+k-nearest neighbors (KNN) score on the training set. It can also learn a
+low-dimensional linear projection of data that can be used for data
+visualization and fast classification.
+=====
+[2] B:neighbors:009:000 (score 0.85329)
+### Dimensionality reduction
+
+NCA can be used to perform supervised dimensionality reduction. The input data
+are projected onto a linear subspace consisting of the directions which
+minimize the NCA objective. The desired dimensionality can be set using the
+parameter n_components. For instance, the following figure shows a
+comparison of dimensionality reduction with Principal Component Analysis
+(PCA), Linear Discriminant Analysis
+(LinearDiscriminantAnalysis) and
+Neighborhood Component Analysis (NeighborhoodComponentsAnalysis) on
+the Digits dataset, a dataset with size $n_{samples} = 1797$ and
+$n_{features} = 64$. The data set is split into a training and a test set
+of equal size, then standardized. For evaluation the 3-nearest neighbor
+classification accuracy is computed on the 2-dimensional projected points found
+by each method. Each data sample belongs to one of 10 classes.
+=====
+[3] B:neighbors:008:003 (score 0.84663)
+NCA classification has been shown to work well in practice for data sets of
+varying size and difficulty. In contrast to related methods such as Linear
+Discriminant Analysis, NCA does not make any assumptions about the class
+distributions. The nearest neighbor classification can naturally produce highly
+irregular decision boundaries.",,,,
+B,T04,Mật độ phần tử khác 0 mặc định của SparseRandomProjection được chọn như thế nào?,"Mặc định là mật độ tối thiểu theo khuyến nghị của Ping Li et al., bằng 1/sqrt(n_features).",random_projection:001,B:random_projection:001:001,B:random_projection:001:001 | B:random_projection:001:002 | B:learning_curve:001:003,"[1] B:random_projection:001:001 (score 0.83251)
+## Sparse random projection
+
+The SparseRandomProjection reduces the
+dimensionality by projecting the original input space using a sparse
+random matrix.
+
+Sparse random matrices are an alternative to dense Gaussian random
+projection matrix that guarantees similar embedding quality while being much
+more memory efficient and allowing faster computation of the projected data.
+
+If we define s = 1 / density, the elements of the random matrix
+are drawn from
+
+Math:
+=====
+[2] B:random_projection:001:002 (score 0.832)
+\left\{
+    \begin{array}{c c l}
+    -\sqrt{\frac{s}{n_{\text{components}}}} & & 1 / 2s\\
+    0 &\text{with probability}  & 1 - 1 / s \\
+    +\sqrt{\frac{s}{n_{\text{components}}}} & & 1 / 2s\\
+    \end{array}
+    \right.
+
+where $n_{\text{components}}$ is the size of the projected subspace.
+By default the density of non zero elements is set to the minimum density as
+recommended by Ping Li et al.: $1 / \sqrt{n_{\text{features}}}$.
+
+Here is a small excerpt which illustrates how to use the sparse random
+projection transformer:
+
+  >>> import numpy as np
+  >>> from sklearn import random_projection
+  >>> X = np.random.rand(100, 10000)
+  >>> transformer = random_projection.SparseRandomProjection()
+  >>> X_new = transformer.fit_transform(X)
+  >>> X_new.shape
+  (100, 3947)
+=====
+[3] B:learning_curve:001:003 (score 0.82522)
+SVC(kernel=""linear""), X, y, param_name=""C"", param_range=np.logspace(-7, 3, 3),
+  ... )
+  >>> train_scores
+  array([[0.90, 0.94, 0.91, 0.89, 0.92],
+         [0.9 , 0.92, 0.93, 0.92, 0.93],
+         [0.97, 1   , 0.98, 0.97, 0.99]])
+  >>> valid_scores
+  array([[0.9, 0.9 , 0.9 , 0.96, 0.9 ],
+         [0.9, 0.83, 0.96, 0.96, 0.93],
+         [1. , 0.93, 1   , 1   , 0.9 ]])",,,,
+B,T05,Tham số bandwidth ảnh hưởng thế nào đến độ mượt của ước lượng mật độ bằng kernel?,Bandwidth lớn cho phân phối rất mượt (bias cao); bandwidth nhỏ cho phân phối không mượt (variance cao).,density:001,B:density:001:002,B:density:001:002 | B:clustering:004:003 | B:density:001:003,"[1] B:density:001:002 (score 0.82736)
+Here we have used kernel='gaussian', as seen above.
+Mathematically, a kernel is a positive function $K(x;h)$
+which is controlled by the bandwidth parameter $h$.
+Given this kernel form, the density estimate at a point $y$ within
+a group of points $x_i; i=1, \cdots, N$ is given by:
+
+Math:
+    \rho_K(y) = \sum_{i=1}^{N} K(y - x_i; h)
+=====
+[2] B:clustering:004:003 (score 0.82598)
+m(x) = \frac{\sum_{x_j \in N(x)}K(x_j - x)x_j}{\sum_{x_j \in N(x)}K(x_j -
+    x)} - x
+
+In our implementation, $K(x)$ is equal to 1 if $x$ is small enough
+and is equal to 0 otherwise. Effectively $K(y - x)$ indicates whether
+$y$ is in the neighborhood of $x$.
+
+The algorithm automatically sets the number of clusters, instead of relying on a
+parameter bandwidth, which dictates the size of the region to search through.
+This parameter can be set manually, but can be estimated using the provided
+estimate_bandwidth function, which is called if the bandwidth is not set.
+=====
+[3] B:density:001:003 (score 0.82575)
+The bandwidth here acts as a smoothing parameter, controlling the tradeoff
+between bias and variance in the result.  A large bandwidth leads to a very
+smooth (i.e. high-bias) density distribution.  A small bandwidth leads
+to an unsmooth (i.e. high-variance) density distribution.
+
+The parameter bandwidth controls this smoothing. One can either set
+manually this parameter or use Scott's and Silverman's estimation
+methods.
+
+KernelDensity implements several common kernel
+forms, which are shown in the following figure:
+
+Kernels' mathematical expressions
+
+The form of these kernels is as follows:",,,,
+B,T06,Vì sao độ quan trọng đặc trưng dựa trên impurity của cây có thể gây sai lệch?,"Nó thiên lệch mạnh, ưu tiên các đặc trưng có nhiều giá trị (high cardinality, thường là số) hơn đặc trưng ít giá trị như nhị phân hoặc categorical nhỏ.",permutation_importance:001,B:ensemble:006:004,B:ensemble:006:004 | B:permutation_importance:001:002 | B:ensemble:002:008,"[1] B:ensemble:006:004 (score 0.83445)
+The impurity-based feature importances computed on tree-based models suffer
+from two flaws that can lead to misleading conclusions. First they are
+computed on statistics derived from the training dataset and therefore do
+not necessarily inform us on which features are most important to make good
+predictions on held-out dataset. Secondly, they favor high cardinality
+features, that is features with many unique values.
+permutation_importance is an alternative to impurity-based feature
+importance that does not suffer from these flaws. These two methods of
+obtaining feature importance are explored in:
+(example: plot_permutation_importance.py).
+=====
+[2] B:permutation_importance:001:002 (score 0.8323)
+Tree-based models provide an alternative measure of feature importances
+based on the mean decrease in impurity
+(MDI). Impurity is quantified by the splitting criterion of the decision trees
+(Gini, Log Loss or Mean Squared Error). However, this method can give high
+importance to features that may not be predictive on unseen data when the model
+is overfitting. Permutation-based feature importance, on the other hand, avoids
+this issue, since it can be computed on unseen data.
+=====
+[3] B:ensemble:002:008 (score 0.81529)
+Alternatively, you can control the tree size by specifying the number of
+leaf nodes via the parameter max_leaf_nodes. In this case,
+trees will be grown using best-first search where nodes with the highest improvement
+in impurity will be expanded first.
+A tree with max_leaf_nodes=k has k - 1 split nodes and thus can
+model interactions of up to order max_leaf_nodes - 1 .",,,,
+C,T01,"Khi dữ liệu ảnh 64x64 pixel (4096 chiều) và chỉ cần giữ ít thành phần chính, nên dùng tùy chọn svd_solver nào của PCA và vì sao?","svd_solver='randomized', vì chỉ cần ước lượng xấp xỉ các singular vector sẽ giữ lại nên hiệu quả hơn nhiều.",decomposition:001,B:decomposition:001:002,B:decomposition:001:002 | B:decomposition:001:005 | B:decomposition:001:001,"[1] B:decomposition:001:002 (score 0.87111)
+The class PCA used with the optional parameter
+svd_solver='randomized' is very useful in that case: since we are going
+to drop most of the singular vectors it is much more efficient to limit the
+computation to an approximated estimate of the singular vectors we will keep
+to actually perform the transform.
+=====
+[2] B:decomposition:001:005 (score 0.85792)
+Note: the implementation of inverse_transform in PCA with
+svd_solver='randomized' is not the exact inverse transform of
+transform even when whiten=False (default).
+=====
+[3] B:decomposition:001:001 (score 0.85763)
+For instance, if we work with 64x64 pixel gray-level pictures
+for face recognition,
+the dimensionality of the data is 4096 and it is slow to train an
+RBF support vector machine on such wide data. Furthermore we know that
+the intrinsic dimensionality of the data is much lower than 4096 since all
+pictures of human faces look somewhat alike.
+The samples lie on a manifold of much lower
+dimension (say around 200 for instance). The PCA algorithm can be used
+to linearly transform the data while both reducing the dimensionality
+and preserving most of the explained variance at the same time.",,,,
+C,T02,Giá trị mặc định tốt thường dùng cho max_features trong random forest khác nhau thế nào giữa bài toán hồi quy và phân loại?,"Hồi quy: max_features=1.0 (tương đương None, xét mọi đặc trưng); phân loại: max_features='sqrt'.",ensemble:005,B:ensemble:005:001,B:ensemble:005:001 | B:ensemble:005:002 | B:grid_search:003:017,"[1] B:ensemble:005:001 (score 0.87198)
+Empirical good default values are
+max_features=1.0 or equivalently max_features=None (always considering
+all features instead of a random subset) for regression problems, and
+max_features=""sqrt"" (using a random subset of size sqrt(n_features))
+for classification tasks (where n_features is the number of features in
+the data). The default value of max_features=1.0 is equivalent to bagged
+trees and more randomness can be achieved by setting smaller values (e.g. 0.3
+is a typical default in the literature). 
+=====
+[2] B:ensemble:005:002 (score 0.86174)
+Good results are often achieved when
+setting max_depth=None in combination with min_samples_split=2 (i.e.,
+when fully developing the trees). Bear in mind though that these values are
+usually not optimal, and might result in models that consume a lot of RAM.
+The best parameter values should always be cross-validated. In addition, note
+that in random forests, bootstrap samples are used by default
+(bootstrap=True) while the default strategy for extra-trees is to use the
+whole dataset (bootstrap=False). 
+=====
+[3] B:grid_search:003:017 (score 0.85171)
+[2, 5, 10]}
+    >>> base_estimator = RandomForestClassifier(random_state=0)
+    >>> X, y = make_classification(n_samples=1000, random_state=0)
+    >>> sh = HalvingGridSearchCV(base_estimator, param_grid, cv=5,
+    ...                          factor=2, resource='n_estimators',
+    ...                          max_resources=30).fit(X, y)
+    >>> sh.best_estimator_
+    RandomForestClassifier(max_depth=5, n_estimators=24, random_state=0)",,,,
+C,T03,NCA (Neighborhood Components Analysis) tối đa hóa đại lượng nào để cải thiện độ chính xác của phân loại láng giềng gần nhất?,Một biến thể ngẫu nhiên (stochastic) của điểm leave-one-out k-nearest neighbors trên tập huấn luyện.,neighbors:008,B:neighbors:008:000,B:neighbors:008:000 | B:neighbors:009:000 | B:neighbors:008:003,"[1] B:neighbors:008:000 (score 0.87139)
+## Neighborhood Components Analysis
+
+Neighborhood Components Analysis (NCA, NeighborhoodComponentsAnalysis)
+is a distance metric learning algorithm which aims to improve the accuracy of
+nearest neighbors classification compared to the standard Euclidean distance.
+The algorithm directly maximizes a stochastic variant of the leave-one-out
+k-nearest neighbors (KNN) score on the training set. It can also learn a
+low-dimensional linear projection of data that can be used for data
+visualization and fast classification.
+=====
+[2] B:neighbors:009:000 (score 0.85329)
+### Dimensionality reduction
+
+NCA can be used to perform supervised dimensionality reduction. The input data
+are projected onto a linear subspace consisting of the directions which
+minimize the NCA objective. The desired dimensionality can be set using the
+parameter n_components. For instance, the following figure shows a
+comparison of dimensionality reduction with Principal Component Analysis
+(PCA), Linear Discriminant Analysis
+(LinearDiscriminantAnalysis) and
+Neighborhood Component Analysis (NeighborhoodComponentsAnalysis) on
+the Digits dataset, a dataset with size $n_{samples} = 1797$ and
+$n_{features} = 64$. The data set is split into a training and a test set
+of equal size, then standardized. For evaluation the 3-nearest neighbor
+classification accuracy is computed on the 2-dimensional projected points found
+by each method. Each data sample belongs to one of 10 classes.
+=====
+[3] B:neighbors:008:003 (score 0.84663)
+NCA classification has been shown to work well in practice for data sets of
+varying size and difficulty. In contrast to related methods such as Linear
+Discriminant Analysis, NCA does not make any assumptions about the class
+distributions. The nearest neighbor classification can naturally produce highly
+irregular decision boundaries.",,,,
+C,T04,Mật độ phần tử khác 0 mặc định của SparseRandomProjection được chọn như thế nào?,"Mặc định là mật độ tối thiểu theo khuyến nghị của Ping Li et al., bằng 1/sqrt(n_features).",random_projection:001,B:random_projection:001:001,B:random_projection:001:001 | B:random_projection:001:002 | B:learning_curve:001:003,"[1] B:random_projection:001:001 (score 0.83251)
+## Sparse random projection
+
+The SparseRandomProjection reduces the
+dimensionality by projecting the original input space using a sparse
+random matrix.
+
+Sparse random matrices are an alternative to dense Gaussian random
+projection matrix that guarantees similar embedding quality while being much
+more memory efficient and allowing faster computation of the projected data.
+
+If we define s = 1 / density, the elements of the random matrix
+are drawn from
+
+Math:
+=====
+[2] B:random_projection:001:002 (score 0.832)
+\left\{
+    \begin{array}{c c l}
+    -\sqrt{\frac{s}{n_{\text{components}}}} & & 1 / 2s\\
+    0 &\text{with probability}  & 1 - 1 / s \\
+    +\sqrt{\frac{s}{n_{\text{components}}}} & & 1 / 2s\\
+    \end{array}
+    \right.
+
+where $n_{\text{components}}$ is the size of the projected subspace.
+By default the density of non zero elements is set to the minimum density as
+recommended by Ping Li et al.: $1 / \sqrt{n_{\text{features}}}$.
+
+Here is a small excerpt which illustrates how to use the sparse random
+projection transformer:
+
+  >>> import numpy as np
+  >>> from sklearn import random_projection
+  >>> X = np.random.rand(100, 10000)
+  >>> transformer = random_projection.SparseRandomProjection()
+  >>> X_new = transformer.fit_transform(X)
+  >>> X_new.shape
+  (100, 3947)
+=====
+[3] B:learning_curve:001:003 (score 0.82522)
+SVC(kernel=""linear""), X, y, param_name=""C"", param_range=np.logspace(-7, 3, 3),
+  ... )
+  >>> train_scores
+  array([[0.90, 0.94, 0.91, 0.89, 0.92],
+         [0.9 , 0.92, 0.93, 0.92, 0.93],
+         [0.97, 1   , 0.98, 0.97, 0.99]])
+  >>> valid_scores
+  array([[0.9, 0.9 , 0.9 , 0.96, 0.9 ],
+         [0.9, 0.83, 0.96, 0.96, 0.93],
+         [1. , 0.93, 1   , 1   , 0.9 ]])",,,,
+C,T05,Tham số bandwidth ảnh hưởng thế nào đến độ mượt của ước lượng mật độ bằng kernel?,Bandwidth lớn cho phân phối rất mượt (bias cao); bandwidth nhỏ cho phân phối không mượt (variance cao).,density:001,B:density:001:002,B:density:001:002 | B:clustering:004:003 | B:density:001:003,"[1] B:density:001:002 (score 0.82736)
+Here we have used kernel='gaussian', as seen above.
+Mathematically, a kernel is a positive function $K(x;h)$
+which is controlled by the bandwidth parameter $h$.
+Given this kernel form, the density estimate at a point $y$ within
+a group of points $x_i; i=1, \cdots, N$ is given by:
+
+Math:
+    \rho_K(y) = \sum_{i=1}^{N} K(y - x_i; h)
+=====
+[2] B:clustering:004:003 (score 0.82598)
+m(x) = \frac{\sum_{x_j \in N(x)}K(x_j - x)x_j}{\sum_{x_j \in N(x)}K(x_j -
+    x)} - x
+
+In our implementation, $K(x)$ is equal to 1 if $x$ is small enough
+and is equal to 0 otherwise. Effectively $K(y - x)$ indicates whether
+$y$ is in the neighborhood of $x$.
+
+The algorithm automatically sets the number of clusters, instead of relying on a
+parameter bandwidth, which dictates the size of the region to search through.
+This parameter can be set manually, but can be estimated using the provided
+estimate_bandwidth function, which is called if the bandwidth is not set.
+=====
+[3] B:density:001:003 (score 0.82575)
+The bandwidth here acts as a smoothing parameter, controlling the tradeoff
+between bias and variance in the result.  A large bandwidth leads to a very
+smooth (i.e. high-bias) density distribution.  A small bandwidth leads
+to an unsmooth (i.e. high-variance) density distribution.
+
+The parameter bandwidth controls this smoothing. One can either set
+manually this parameter or use Scott's and Silverman's estimation
+methods.
+
+KernelDensity implements several common kernel
+forms, which are shown in the following figure:
+
+Kernels' mathematical expressions
+
+The form of these kernels is as follows:",,,,
+C,T06,Vì sao độ quan trọng đặc trưng dựa trên impurity của cây có thể gây sai lệch?,"Nó thiên lệch mạnh, ưu tiên các đặc trưng có nhiều giá trị (high cardinality, thường là số) hơn đặc trưng ít giá trị như nhị phân hoặc categorical nhỏ.",permutation_importance:001,B:permutation_importance:001:002,B:permutation_importance:001:002 | B:permutation_importance:001:004 | B:permutation_importance:001:001,"[1] B:permutation_importance:001:002 (score 0.8323)
+Tree-based models provide an alternative measure of feature importances
+based on the mean decrease in impurity
+(MDI). Impurity is quantified by the splitting criterion of the decision trees
+(Gini, Log Loss or Mean Squared Error). However, this method can give high
+importance to features that may not be predictive on unseen data when the model
+is overfitting. Permutation-based feature importance, on the other hand, avoids
+this issue, since it can be computed on unseen data.
+=====
+[2] B:permutation_importance:001:004 (score 0.81408)
+The following example highlights the limitations of impurity-based feature
+importance in contrast to permutation-based feature importance:
+(example: plot_permutation_importance.py).
+=====
+[3] B:permutation_importance:001:001 (score 0.81266)
+- Compute importance $i_j$ for feature $f_j$ defined as:
+
+Math:
+    i_j = s - \frac{1}{K} \sum_{k=1}^{K} s_{k,j}
+
+## Relation to impurity-based importance in trees",,,,
