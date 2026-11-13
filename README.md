@@ -15,7 +15,8 @@ Biến tài liệu mở thành knowledge base truy xuất được, rồi đo ch
 - [x] Hai chunker, thống kê chunk, nhãn coherence (10 vị trí cố định theo quy tắc)
 - [x] Ingest (embed + lưu Chroma, nạp lại không nhân đôi), chạy 3 cấu hình, trace top-3, Hit@1 / Evidence Hit@3
 - [x] Kiểm tra metadata, grounding, phân tích lỗi, báo cáo cá nhân
-- [ ] Tác giả rà lại các nhãn do LLM chấm sơ bộ (`results/labels/*_labeled.csv`, cột `reviewed_by_author`) và điền commit chốt bài vào `STUDENT.md`
+- [x] Điền commit chốt bài vào `STUDENT.md`
+- [x] Tác giả đã rà 38/38 nhãn do LLM chấm sơ bộ, giữ nguyên toàn bộ (`results/labels/REVIEW_LOG.md`)
 
 ## Kết quả chính (22 câu; Hit@1 / Evidence Hit@3)
 
@@ -82,7 +83,7 @@ Hoặc từng bước: xem `run_all.sh`. Cần Python ≥ 3.11 và mạng tới 
 
 ## Dùng AI và rủi ro thiên lệch
 
-Claude (LLM) hỗ trợ viết code, soạn câu hỏi/evidence từ việc đọc nguồn, chấm sơ bộ các nhãn coherence/grounding và soạn nháp báo cáo. Evidence được script kiểm chứng tự động; mọi nhãn ghi rõ `grader = claude-llm-assisted` kèm lý do và cột `reviewed_by_author` để tác giả rà lại. Người soạn benchmark, người viết chunker và người chấm là cùng một bên nên có nguy cơ thiên lệch (ví dụ chấm chunk của chiến lược mình thiết kế); tập test chỉ 6 câu nên kết quả chỉ mang tính minh họa.
+Claude (LLM) hỗ trợ viết code, soạn câu hỏi/evidence từ việc đọc nguồn, chấm sơ bộ các nhãn coherence/grounding và soạn nháp báo cáo. Evidence được script kiểm chứng tự động; mọi nhãn ghi rõ `grader = claude-llm-assisted` kèm lý do và cột `reviewed_by_author` ghi việc tác giả đã rà (38/38, dựa trên bản dịch ý tiếng Việt, không đổi nhãn nào). Người soạn benchmark, người viết chunker và người chấm là cùng một bên nên có nguy cơ thiên lệch (ví dụ chấm chunk của chiến lược mình thiết kế); tập test chỉ 6 câu nên kết quả chỉ mang tính minh họa.
 
 ## Giới hạn đã biết
 

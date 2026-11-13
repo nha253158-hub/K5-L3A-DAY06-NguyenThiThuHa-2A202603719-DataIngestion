@@ -75,7 +75,7 @@ Ghi chú: metadata và filter kiểm trên top-3 của 6 câu test (18 bản ghi
 - Coherence: 10 vị trí cố định theo quy tắc trong `src/audit.py` (sắp xếp 288 unit_id theo chữ cái, lấy chỉ số 0, k, …, 9k với k = 28, tại ký tự giữa trang), lấy chunk của A và B chứa vị trí đó. Nhãn: `results/labels/coherence_sheet_labeled.csv`. Nhãn B v0 (trước khi sửa chunker) ở `coherence_B_v0_before_fix.csv`.
 - Metadata: `results/labels/metadata_check.csv` (đối chiếu tự động với corpus gốc: source, page, guide_section, offset).
 - Grounding: `results/labels/grounding_sheet_labeled.csv`, thang chấm ở `results/labels/GROUNDING_RUBRIC.md` (2 = top-3 đủ ý chính; 1 = liên quan nhưng thiếu/ cắt ý chính; 0 = không đủ). Thang này được viết cùng lúc gán nhãn, sau khi đã xem top-3, nên không phải tiêu chí chốt trước.
-- Nhãn coherence và grounding do Claude chấm sơ bộ (`grader = claude-llm-assisted (cần tác giả rà lại)`); cột `reviewed_by_author` đang để trống cho đến khi tôi rà lại.
+- Nhãn coherence và grounding do Claude chấm sơ bộ (`grader = claude-llm-assisted (cần tác giả rà lại)`); tôi đã rà lại **38/38 nhãn** vào 13/11/2026 và giữ nguyên toàn bộ, không đổi nhãn nào (6 nhãn khó nhất được hỏi riêng từng dòng). Tài liệu gốc bằng tiếng Anh nên tôi rà dựa trên bản dịch ý sang tiếng Việt do Claude cung cấp, không đọc nguyên văn, và đã thấy nhãn của Claude trước khi quyết định. Chi tiết ở `results/labels/REVIEW_LOG.md`.
 
 ## Phân tích và kết luận
 
@@ -99,7 +99,7 @@ Ghi chú: metadata và filter kiểm trên top-3 của 6 câu test (18 bản ghi
 - **Hạn chế**
   - Dữ liệu: câu hỏi tiếng Việt truy xuất tài liệu tiếng Anh bằng model nhỏ, kết quả có thể không áp dụng cho câu hỏi tiếng Anh hoặc model lớn hơn. Chuẩn hóa bằng regex làm mất hình và bảng. Mỗi câu có một (D15: hai) trang gold; bằng chứng tương đương ở trang khác không được tính là hit.
   - Test nhỏ: 6 câu test (2 câu filter), 22 câu tổng; một câu đổi chiều làm Hit@3 thay đổi 16,7 điểm phần trăm trên test và 4,5 điểm trên toàn bộ 22 câu. Không có khoảng tin cậy; kiểm định dấu cho A–B ra p = 0,22.
-  - Nhãn: coherence (10 mẫu) và grounding (18 dòng) do một người chấm là LLM (Claude), cùng bên soạn benchmark và chunker, nên có nguy cơ thiên lệch, nhất là khi chấm chunk của chiến lược mình thiết kế. Nhãn B T06 = 2 là nhãn biên. Nếu đổi thành 1 thì grounding B còn 1,83, ngang C. Chưa có người chấm thứ hai nên chưa đo độ đồng thuận.
+  - Nhãn: coherence (10 mẫu) và grounding (18 dòng) do một người chấm là LLM (Claude), cùng bên soạn benchmark và chunker, nên có nguy cơ thiên lệch, nhất là khi chấm chunk của chiến lược mình thiết kế. Nhãn B T06 = 2 là nhãn biên; tôi đã rà lại và giữ 2 (nếu đổi thành 1 thì grounding B còn 1,83, ngang C). Tôi rà 38/38 nhãn và đồng ý hết, nhưng việc rà này chưa độc lập: tôi thấy nhãn của Claude trước khi quyết định (nguy cơ bị neo theo nhãn có sẵn) và rà qua bản dịch ý chứ không đọc nguyên văn tiếng Anh. Vì không có bất đồng nào nên chưa đo được độ đồng thuận giữa hai người chấm độc lập.
   - Độc lập của test: khi sửa chunker B v0 → v1 (v0 cắt giữa câu khi tách khối dài; sửa trước khi chạy truy xuất, sau khi xem mẫu coherence), tôi đã thấy evidence của T02 (câu test) bị tách trong v0. Vì vậy kết quả T02 của B không hoàn toàn độc lập với việc sửa này; T02 cả A, B, C đều hit nên không làm lệch so sánh. Nhãn coherence B v0 là 1,7 và v1 là 1,8.
   - Đo thời gian và chi phí: một lần chạy, 2 CPU, không lặp; chi phí 0 USD chưa tính công người; chưa đo bộ nhớ chỉ mục theo cấu hình.
   - Cách đóng băng benchmark là hash tự lưu, chưa có mốc thời gian độc lập cho tới khi commit.
@@ -112,7 +112,7 @@ Ghi chú: metadata và filter kiểm trên top-3 của 6 câu test (18 bản ghi
 
 - Công cụ: Claude (LLM) hỗ trợ viết code, soạn câu hỏi và trích đoạn evidence từ việc đọc nguồn, chấm sơ bộ nhãn coherence/grounding và soạn nháp báo cáo này.
 - Kiểm tra: evidence do `benchmark_validate.py` kiểm chứng tự động; metadata đối chiếu tự động với corpus gốc; số liệu trong báo cáo đối chiếu với `results/metrics.csv`, `summary.json` và trace; top-3 của Chroma đối chiếu với tìm vét cạn (`results/ann_check.json`). Dựng lại corpus và chạy lại truy xuất cho cùng hash corpus, cùng metrics, cùng top-3 và điểm ở 66/66 cặp câu–cấu hình (`results/reproducibility_check.json`).
-- Nhãn thủ công chưa được tác giả rà: cột `reviewed_by_author` còn trống. Cập nhật mục này sau khi rà: __(chưa rà)__.
+- Nhãn thủ công: tác giả rà 38/38 nhãn và đồng ý với tất cả (xem `results/labels/REVIEW_LOG.md`), dựa trên bản dịch ý tiếng Việt của Claude vì nguồn bằng tiếng Anh.
 
 ## Phụ lục — kết quả từng câu (Hit@1 / Evidence Hit@3 / Page Hit@3; 1 = có)
 

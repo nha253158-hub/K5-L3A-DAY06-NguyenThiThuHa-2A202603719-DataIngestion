@@ -38,7 +38,7 @@ l instance such as:
     >>> pca1.components_.shape
     (10, 64)
 
-Enabling caching triggers a clone of the t",1,Top-3 có chunk nêu svd_solver='randomized' nhưng câu giải thích bị cắt giữa chừng ('drop most of th') nên thiếu lý do hiệu quả (ước lượng xấp xỉ singular vector); phần còn lại không liên quan.,claude-llm-assisted (cần tác giả rà lại),
+Enabling caching triggers a clone of the t",1,Top-3 có chunk nêu svd_solver='randomized' nhưng câu giải thích bị cắt giữa chừng ('drop most of th') nên thiếu lý do hiệu quả (ước lượng xấp xỉ singular vector); phần còn lại không liên quan.,claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 A,T02,Giá trị mặc định tốt thường dùng cho max_features trong random forest khác nhau thế nào giữa bài toán hồi quy và phân loại?,"Hồi quy: max_features=1.0 (tương đương None, xét mọi đặc trưng); phân loại: max_features='sqrt'.",ensemble:005,A:ensemble:005:001,A:ensemble:005:001 | A:ensemble:005:002 | A:ensemble:004:002,"[1] A:ensemble:005:001 (score 0.8775)
 tion of variance, but
 also the greater the increase in bias. Empirical good default values are
@@ -74,7 +74,7 @@ ples=10000, n_features=10, centers=100,
     >>> scores.mean()
     np.float64(0.999)
 
-    >>> clf = ExtraTr",2,Rank 1 (ensemble:005:001) chứa trọn câu về max_features=1.0/None cho hồi quy và 'sqrt' cho phân loại.,claude-llm-assisted (cần tác giả rà lại),
+    >>> clf = ExtraTr",2,Rank 1 (ensemble:005:001) chứa trọn câu về max_features=1.0/None cho hồi quy và 'sqrt' cho phân loại.,claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 A,T03,NCA (Neighborhood Components Analysis) tối đa hóa đại lượng nào để cải thiện độ chính xác của phân loại láng giềng gần nhất?,Một biến thể ngẫu nhiên (stochastic) của điểm leave-one-out k-nearest neighbors trên tập huấn luyện.,neighbors:008,A:neighbors:009:001,A:neighbors:009:001 | A:neighbors:008:000 | A:neighbors:008:002,"[1] A:neighbors:009:001 (score 0.87989)
 ntAnalysis) and
 Neighborhood Component Analysis (NeighborhoodComponentsAnalysis) on
@@ -111,7 +111,7 @@ for more details.
 ### Classification
 
 Combined with a nearest neighbors classifier (KNeighborsClassifier),
-NCA is attractive for classification",2,Rank 2 (neighbors:008:000) chứa câu NCA tối đa hóa biến thể ngẫu nhiên của điểm leave-one-out KNN; rank 1 là trang khác nhưng không mâu thuẫn.,claude-llm-assisted (cần tác giả rà lại),
+NCA is attractive for classification",2,Rank 2 (neighbors:008:000) chứa câu NCA tối đa hóa biến thể ngẫu nhiên của điểm leave-one-out KNN; rank 1 là trang khác nhưng không mâu thuẫn.,claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 A,T04,Mật độ phần tử khác 0 mặc định của SparseRandomProjection được chọn như thế nào?,"Mặc định là mật độ tối thiểu theo khuyến nghị của Ping Li et al., bằng 1/sqrt(n_features).",random_projection:001,A:random_projection:001:003,A:random_projection:001:003 | A:random_projection:001:001 | A:metrics:002:003,"[1] A:random_projection:001:003 (score 0.84264)
 ce.
 By default the density of non zero elements is set to the minimum density as
@@ -161,7 +161,7 @@ puted"":
            [0.89483932, 0.51341712, 1.        , 0.7768366 ],
            [0.58364548, 0.83822343, 0.7768366 , 1.        ]])
 
-    >>> svm = SVC(kernel='preco",2,Rank 1 (random_projection:001:003) chứa câu mật độ mặc định = 1/sqrt(n_features) theo Ping Li et al.,claude-llm-assisted (cần tác giả rà lại),
+    >>> svm = SVC(kernel='preco",2,Rank 1 (random_projection:001:003) chứa câu mật độ mặc định = 1/sqrt(n_features) theo Ping Li et al.,claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 A,T05,Tham số bandwidth ảnh hưởng thế nào đến độ mượt của ước lượng mật độ bằng kernel?,Bandwidth lớn cho phân phối rất mượt (bias cao); bandwidth nhỏ cho phân phối không mượt (variance cao).,density:001,A:kernel_ridge:000:002,A:kernel_ridge:000:002 | A:outlier_detection:001:005 | A:density:001:002,"[1] A:kernel_ridge:000:002 (score 0.83103)
 g figure compares KernelRidge and
 SVR on an artificial dataset, which consists of a
@@ -199,7 +199,7 @@ Given this kernel form, the density estimate at a point $y$ within
 a group of points $x_i; i=1, \cdots, N$ is given by:
 
 Math:
-    \",1,"Có chunk về bandwidth (density:001:002) nhưng chỉ định nghĩa h điều khiển kernel; câu nêu bandwidth lớn -> mượt (high-bias), nhỏ -> không mượt (high-variance) nằm ở chunk 003 không được lấy; 2 chunk còn lại là trang khác.",claude-llm-assisted (cần tác giả rà lại),
+    \",1,"Có chunk về bandwidth (density:001:002) nhưng chỉ định nghĩa h điều khiển kernel; câu nêu bandwidth lớn -> mượt (high-bias), nhỏ -> không mượt (high-variance) nằm ở chunk 003 không được lấy; 2 chunk còn lại là trang khác.",claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): giữ 1 (lúc đầu chọn 0 nhưng là bấm nhầm, tác giả xác nhận không đổi)"
 A,T06,Vì sao độ quan trọng đặc trưng dựa trên impurity của cây có thể gây sai lệch?,"Nó thiên lệch mạnh, ưu tiên các đặc trưng có nhiều giá trị (high cardinality, thường là số) hơn đặc trưng ít giá trị như nhị phân hoặc categorical nhỏ.",permutation_importance:001,A:permutation_importance:001:001,A:permutation_importance:001:001 | A:ensemble:006:003 | A:permutation_importance:001:004,"[1] A:permutation_importance:001:001 (score 0.83833)
 rsion of the data named $\tilde{D}_{k,j}$.
     - Compute the score $s_{k,j}$ of model $m$ on corrupted data
@@ -244,7 +244,7 @@ still has access to the latter through its correlated feature. This results in a
 lower reported importance value for both features, though they might actually
 be important.
 
-The figure below shows the permutation feature importa",1,"Chunk liên quan (permutation_importance:001:001 mục 'Relation to impurity-based importance', ensemble:006:003 bị cắt ngay trước câu cảnh báo) nhưng không chunk nào nêu thiên lệch về đặc trưng nhiều giá trị (high cardinality).",claude-llm-assisted (cần tác giả rà lại),
+The figure below shows the permutation feature importa",1,"Chunk liên quan (permutation_importance:001:001 mục 'Relation to impurity-based importance', ensemble:006:003 bị cắt ngay trước câu cảnh báo) nhưng không chunk nào nêu thiên lệch về đặc trưng nhiều giá trị (high cardinality).",claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 B,T01,"Khi dữ liệu ảnh 64x64 pixel (4096 chiều) và chỉ cần giữ ít thành phần chính, nên dùng tùy chọn svd_solver nào của PCA và vì sao?","svd_solver='randomized', vì chỉ cần ước lượng xấp xỉ các singular vector sẽ giữ lại nên hiệu quả hơn nhiều.",decomposition:001,B:decomposition:001:002,B:decomposition:001:002 | B:decomposition:001:005 | B:decomposition:001:001,"[1] B:decomposition:001:002 (score 0.87111)
 The class PCA used with the optional parameter
 svd_solver='randomized' is very useful in that case: since we are going
@@ -267,7 +267,7 @@ pictures of human faces look somewhat alike.
 The samples lie on a manifold of much lower
 dimension (say around 200 for instance). The PCA algorithm can be used
 to linearly transform the data while both reducing the dimensionality
-and preserving most of the explained variance at the same time.",2,Rank 1 (decomposition:001:002) chứa trọn câu: dùng randomized vì chỉ cần ước lượng xấp xỉ các singular vector giữ lại -> đủ đáp án và lý do.,claude-llm-assisted (cần tác giả rà lại),
+and preserving most of the explained variance at the same time.",2,Rank 1 (decomposition:001:002) chứa trọn câu: dùng randomized vì chỉ cần ước lượng xấp xỉ các singular vector giữ lại -> đủ đáp án và lý do.,claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 B,T02,Giá trị mặc định tốt thường dùng cho max_features trong random forest khác nhau thế nào giữa bài toán hồi quy và phân loại?,"Hồi quy: max_features=1.0 (tương đương None, xét mọi đặc trưng); phân loại: max_features='sqrt'.",ensemble:005,B:ensemble:005:001,B:ensemble:005:001 | B:ensemble:005:002 | B:grid_search:003:017,"[1] B:ensemble:005:001 (score 0.87198)
 Empirical good default values are
 max_features=1.0 or equivalently max_features=None (always considering
@@ -296,7 +296,7 @@ whole dataset (bootstrap=False).
     ...                          factor=2, resource='n_estimators',
     ...                          max_resources=30).fit(X, y)
     >>> sh.best_estimator_
-    RandomForestClassifier(max_depth=5, n_estimators=24, random_state=0)",2,Rank 1 (ensemble:005:001) chứa trọn evidence; đủ trả lời.,claude-llm-assisted (cần tác giả rà lại),
+    RandomForestClassifier(max_depth=5, n_estimators=24, random_state=0)",2,Rank 1 (ensemble:005:001) chứa trọn evidence; đủ trả lời.,claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 B,T03,NCA (Neighborhood Components Analysis) tối đa hóa đại lượng nào để cải thiện độ chính xác của phân loại láng giềng gần nhất?,Một biến thể ngẫu nhiên (stochastic) của điểm leave-one-out k-nearest neighbors trên tập huấn luyện.,neighbors:008,B:neighbors:008:000,B:neighbors:008:000 | B:neighbors:009:000 | B:neighbors:008:003,"[1] B:neighbors:008:000 (score 0.87139)
 ## Neighborhood Components Analysis
 
@@ -330,7 +330,7 @@ NCA classification has been shown to work well in practice for data sets of
 varying size and difficulty. In contrast to related methods such as Linear
 Discriminant Analysis, NCA does not make any assumptions about the class
 distributions. The nearest neighbor classification can naturally produce highly
-irregular decision boundaries.",2,Rank 1 (neighbors:008:000) chứa trọn evidence.,claude-llm-assisted (cần tác giả rà lại),
+irregular decision boundaries.",2,Rank 1 (neighbors:008:000) chứa trọn evidence.,claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 B,T04,Mật độ phần tử khác 0 mặc định của SparseRandomProjection được chọn như thế nào?,"Mặc định là mật độ tối thiểu theo khuyến nghị của Ping Li et al., bằng 1/sqrt(n_features).",random_projection:001,B:random_projection:001:001,B:random_projection:001:001 | B:random_projection:001:002 | B:learning_curve:001:003,"[1] B:random_projection:001:001 (score 0.83251)
 ## Sparse random projection
 
@@ -381,7 +381,7 @@ SVC(kernel=""linear""), X, y, param_name=""C"", param_range=np.logspace(-7, 3, 3
   >>> valid_scores
   array([[0.9, 0.9 , 0.9 , 0.96, 0.9 ],
          [0.9, 0.83, 0.96, 0.96, 0.93],
-         [1. , 0.93, 1   , 1   , 0.9 ]])",2,"Evidence nằm ở rank 2 (random_projection:001:002, score 0.832) chứ không phải rank 1 (rank 1 cùng trang nhưng không có công thức); top-3 vẫn đủ trả lời.",claude-llm-assisted (cần tác giả rà lại),
+         [1. , 0.93, 1   , 1   , 0.9 ]])",2,"Evidence nằm ở rank 2 (random_projection:001:002, score 0.832) chứ không phải rank 1 (rank 1 cùng trang nhưng không có công thức); top-3 vẫn đủ trả lời.",claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): ban đầu chọn 1 (đáp án ở hạng 2), sau khi chốt quy tắc 'đáp án ở hạng nào trong top-3 cũng được' thì giữ 2"
 B,T05,Tham số bandwidth ảnh hưởng thế nào đến độ mượt của ước lượng mật độ bằng kernel?,Bandwidth lớn cho phân phối rất mượt (bias cao); bandwidth nhỏ cho phân phối không mượt (variance cao).,density:001,B:density:001:002,B:density:001:002 | B:clustering:004:003 | B:density:001:003,"[1] B:density:001:002 (score 0.82736)
 Here we have used kernel='gaussian', as seen above.
 Mathematically, a kernel is a positive function $K(x;h)$
@@ -420,7 +420,7 @@ forms, which are shown in the following figure:
 
 Kernels' mathematical expressions
 
-The form of these kernels is as follows:",2,"Rank 3 (density:001:003) chứa trọn câu bandwidth lớn/nhỏ ảnh hưởng độ mượt, high-bias/high-variance; rank 1 (density:001:002) bổ sung định nghĩa.",claude-llm-assisted (cần tác giả rà lại),
+The form of these kernels is as follows:",2,"Rank 3 (density:001:003) chứa trọn câu bandwidth lớn/nhỏ ảnh hưởng độ mượt, high-bias/high-variance; rank 1 (density:001:002) bổ sung định nghĩa.",claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 B,T06,Vì sao độ quan trọng đặc trưng dựa trên impurity của cây có thể gây sai lệch?,"Nó thiên lệch mạnh, ưu tiên các đặc trưng có nhiều giá trị (high cardinality, thường là số) hơn đặc trưng ít giá trị như nhị phân hoặc categorical nhỏ.",permutation_importance:001,B:ensemble:006:004,B:ensemble:006:004 | B:permutation_importance:001:002 | B:ensemble:002:008,"[1] B:ensemble:006:004 (score 0.83445)
 The impurity-based feature importances computed on tree-based models suffer
 from two flaws that can lead to misleading conclusions. First they are
@@ -448,7 +448,7 @@ leaf nodes via the parameter max_leaf_nodes. In this case,
 trees will be grown using best-first search where nodes with the highest improvement
 in impurity will be expanded first.
 A tree with max_leaf_nodes=k has k - 1 split nodes and thus can
-model interactions of up to order max_leaf_nodes - 1 .",2,"Rank 1 (ensemble:006:004, trang ensemble:006 khác trang gold) nêu rõ importance dựa trên impurity 'favor high cardinality features' -> đủ ý chính của đáp án dù không phải trang gold; thiếu chi tiết 'typically numerical'. Nhãn biên, tác giả nên rà lại. Hit@3 theo gold vẫn là miss.",claude-llm-assisted (cần tác giả rà lại),
+model interactions of up to order max_leaf_nodes - 1 .",2,"Rank 1 (ensemble:006:004, trang ensemble:006 khác trang gold) nêu rõ importance dựa trên impurity 'favor high cardinality features' -> đủ ý chính của đáp án dù không phải trang gold; thiếu chi tiết 'typically numerical'. Nhãn biên, tác giả nên rà lại. Hit@3 theo gold vẫn là miss.",claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): giữ 2 (ý 'ưu tiên đặc trưng nhiều giá trị' có trong top-3, dù khác trang gold)"
 C,T01,"Khi dữ liệu ảnh 64x64 pixel (4096 chiều) và chỉ cần giữ ít thành phần chính, nên dùng tùy chọn svd_solver nào của PCA và vì sao?","svd_solver='randomized', vì chỉ cần ước lượng xấp xỉ các singular vector sẽ giữ lại nên hiệu quả hơn nhiều.",decomposition:001,B:decomposition:001:002,B:decomposition:001:002 | B:decomposition:001:005 | B:decomposition:001:001,"[1] B:decomposition:001:002 (score 0.87111)
 The class PCA used with the optional parameter
 svd_solver='randomized' is very useful in that case: since we are going
@@ -471,7 +471,7 @@ pictures of human faces look somewhat alike.
 The samples lie on a manifold of much lower
 dimension (say around 200 for instance). The PCA algorithm can be used
 to linearly transform the data while both reducing the dimensionality
-and preserving most of the explained variance at the same time.",2,"Giống B (C không có filter cho câu này, cùng top-3): rank 1 chứa trọn evidence.",claude-llm-assisted (cần tác giả rà lại),
+and preserving most of the explained variance at the same time.",2,"Giống B (C không có filter cho câu này, cùng top-3): rank 1 chứa trọn evidence.",claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 C,T02,Giá trị mặc định tốt thường dùng cho max_features trong random forest khác nhau thế nào giữa bài toán hồi quy và phân loại?,"Hồi quy: max_features=1.0 (tương đương None, xét mọi đặc trưng); phân loại: max_features='sqrt'.",ensemble:005,B:ensemble:005:001,B:ensemble:005:001 | B:ensemble:005:002 | B:grid_search:003:017,"[1] B:ensemble:005:001 (score 0.87198)
 Empirical good default values are
 max_features=1.0 or equivalently max_features=None (always considering
@@ -500,7 +500,7 @@ whole dataset (bootstrap=False).
     ...                          factor=2, resource='n_estimators',
     ...                          max_resources=30).fit(X, y)
     >>> sh.best_estimator_
-    RandomForestClassifier(max_depth=5, n_estimators=24, random_state=0)",2,Giống B; rank 1 chứa trọn evidence.,claude-llm-assisted (cần tác giả rà lại),
+    RandomForestClassifier(max_depth=5, n_estimators=24, random_state=0)",2,Giống B; rank 1 chứa trọn evidence.,claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 C,T03,NCA (Neighborhood Components Analysis) tối đa hóa đại lượng nào để cải thiện độ chính xác của phân loại láng giềng gần nhất?,Một biến thể ngẫu nhiên (stochastic) của điểm leave-one-out k-nearest neighbors trên tập huấn luyện.,neighbors:008,B:neighbors:008:000,B:neighbors:008:000 | B:neighbors:009:000 | B:neighbors:008:003,"[1] B:neighbors:008:000 (score 0.87139)
 ## Neighborhood Components Analysis
 
@@ -534,7 +534,7 @@ NCA classification has been shown to work well in practice for data sets of
 varying size and difficulty. In contrast to related methods such as Linear
 Discriminant Analysis, NCA does not make any assumptions about the class
 distributions. The nearest neighbor classification can naturally produce highly
-irregular decision boundaries.",2,Giống B; rank 1 chứa trọn evidence.,claude-llm-assisted (cần tác giả rà lại),
+irregular decision boundaries.",2,Giống B; rank 1 chứa trọn evidence.,claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 C,T04,Mật độ phần tử khác 0 mặc định của SparseRandomProjection được chọn như thế nào?,"Mặc định là mật độ tối thiểu theo khuyến nghị của Ping Li et al., bằng 1/sqrt(n_features).",random_projection:001,B:random_projection:001:001,B:random_projection:001:001 | B:random_projection:001:002 | B:learning_curve:001:003,"[1] B:random_projection:001:001 (score 0.83251)
 ## Sparse random projection
 
@@ -585,7 +585,7 @@ SVC(kernel=""linear""), X, y, param_name=""C"", param_range=np.logspace(-7, 3, 3
   >>> valid_scores
   array([[0.9, 0.9 , 0.9 , 0.96, 0.9 ],
          [0.9, 0.83, 0.96, 0.96, 0.93],
-         [1. , 0.93, 1   , 1   , 0.9 ]])",2,Giống B; evidence ở rank 2.,claude-llm-assisted (cần tác giả rà lại),
+         [1. , 0.93, 1   , 1   , 0.9 ]])",2,Giống B; evidence ở rank 2.,claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 C,T05,Tham số bandwidth ảnh hưởng thế nào đến độ mượt của ước lượng mật độ bằng kernel?,Bandwidth lớn cho phân phối rất mượt (bias cao); bandwidth nhỏ cho phân phối không mượt (variance cao).,density:001,B:density:001:002,B:density:001:002 | B:clustering:004:003 | B:density:001:003,"[1] B:density:001:002 (score 0.82736)
 Here we have used kernel='gaussian', as seen above.
 Mathematically, a kernel is a positive function $K(x;h)$
@@ -624,7 +624,7 @@ forms, which are shown in the following figure:
 
 Kernels' mathematical expressions
 
-The form of these kernels is as follows:",2,Giống B: cả ba chunk top-3 của B đã thuộc mục Unsupervised learning nên filter không đổi kết quả.,claude-llm-assisted (cần tác giả rà lại),
+The form of these kernels is as follows:",2,Giống B: cả ba chunk top-3 của B đã thuộc mục Unsupervised learning nên filter không đổi kết quả.,claude-llm-assisted (cần tác giả rà lại),"Hà (13/11/2026): đồng ý, giữ nguyên nhãn"
 C,T06,Vì sao độ quan trọng đặc trưng dựa trên impurity của cây có thể gây sai lệch?,"Nó thiên lệch mạnh, ưu tiên các đặc trưng có nhiều giá trị (high cardinality, thường là số) hơn đặc trưng ít giá trị như nhị phân hoặc categorical nhỏ.",permutation_importance:001,B:permutation_importance:001:002,B:permutation_importance:001:002 | B:permutation_importance:001:004 | B:permutation_importance:001:001,"[1] B:permutation_importance:001:002 (score 0.8323)
 Tree-based models provide an alternative measure of feature importances
 based on the mean decrease in impurity
@@ -645,4 +645,4 @@ importance in contrast to permutation-based feature importance:
 Math:
     i_j = s - \frac{1}{K} \sum_{k=1}^{K} s_{k,j}
 
-## Relation to impurity-based importance in trees",1,Filter 'Inspection' loại ensemble:006 (mục Supervised learning) nên mất chunk nêu high cardinality; còn lại chỉ nêu lý do overfitting (MDI tính trên dữ liệu train) -> liên quan nhưng thiếu ý chính 'thiên lệch về high-cardinality'.,claude-llm-assisted (cần tác giả rà lại),
+## Relation to impurity-based importance in trees",1,Filter 'Inspection' loại ensemble:006 (mục Supervised learning) nên mất chunk nêu high cardinality; còn lại chỉ nêu lý do overfitting (MDI tính trên dữ liệu train) -> liên quan nhưng thiếu ý chính 'thiên lệch về high-cardinality'.,claude-llm-assisted (cần tác giả rà lại),Hà (13/11/2026): giữ 1 (thiếu ý chính high cardinality)
